@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | 韩志超</title>
+  <title>tomcat | 韩志超</title>
   <meta name="author" content="Han Zhichao">
   
   <meta name="description" content="测试开发">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="tomcat"/>
   <meta property="og:site_name" content="韩志超"/>
 
   
@@ -114,31 +114,31 @@
 	  <div class="container" >
 	    <div class="row">
 	
-	<div class="col-md-9 center-content">
+	<div class="col-md-9">
 	
 
 		<div class="content">
 			<!-- index -->
 		   
-			  	<h2>归档</h2>
-		  		
-	              <p class="archive-item">
-						<a href="../../2017/11/02/tomcat.html" class="archive-title">tomcat</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/osi.html" class="archive-title">osi</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/01/TestMarkdown.html" class="archive-title">TestMarkdown</a><span class="archive post-time">2017-11-01</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/01/hello-world.html" class="archive-title">Hello World</a><span class="archive post-time">2017-11-01</span>
-					</p>
-			  	
-			  <!-- post -->
+
+			  		<h2>tomcat</h2>
+					
+					<div>
+						<span class="post-time">2017-11-02 20:50:35</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="Tomcat-调优总结"><a href="#Tomcat-调优总结" class="headerlink" title="Tomcat 调优总结"></a>Tomcat 调优总结</h1><blockquote>
+<p>tomcat 优化分为系统优化、JVM调优、tomcat本身优化</p>
+</blockquote>
+<h2 id="系统优化"><a href="#系统优化" class="headerlink" title="系统优化"></a>系统优化</h2><h3 id="调整tomcat内存占用"><a href="#调整tomcat内存占用" class="headerlink" title="调整tomcat内存占用"></a>调整tomcat内存占用</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim <span class="meta-keyword">/usr/</span>share<span class="meta-keyword">/tomcat8/</span>bin/catalina.sh</div><div class="line">设置JAVA_OPT=<span class="string">"-Xms 1024m -Xmx 1520m"</span></div><div class="line">-Xms tomcat启动初始内存，一般为服务器开机空闲内存<span class="number">-100</span>M</div><div class="line">-Xmx tomcat最大占用内存</div></pre></td></tr></table></figure>
+<h2 id="JVM优化"><a href="#JVM优化" class="headerlink" title="JVM优化"></a>JVM优化</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">JVM堆的大小决定了垃圾回收的时间和频度。</div><div class="line">堆设置的很大，完全垃圾收集就会很慢，频度会降低，相反，完全收集就很快，但是会更频繁。</div><div class="line">调整目标：最小化垃圾收集时间，一在特定的时间内最大化处理客户请求</div><div class="line">一般堆设置为物理内存的<span class="number">80</span>%,一次完全的垃圾收集不应超过<span class="number">3</span><span class="number">-5</span>s</div><div class="line">当增加处理器时，需要增加内存，应为内存分配时并行的，而垃圾回收不是并行的</div></pre></td></tr></table></figure>
+<h2 id="tomcat本身优化"><a href="#tomcat本身优化" class="headerlink" title="tomcat本身优化"></a>tomcat本身优化</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">vim /etc/tomcat8/server.xml</div><div class="line">&lt;Connector /&gt;配置中</div><div class="line">maxThreads=<span class="string">"150"</span> 最大线程数，window最大是2000，linux最大是1024</div><div class="line">minSpareThreads=<span class="string">"25"</span> 最小空等待线程-没有连接时也开启25个空线程等待</div><div class="line">maxSpareThreads=<span class="string">"75"</span> 最多空线程数，一旦超过这个值，tomcat就会关闭不再需要的socket线程</div><div class="line">acceptCount=<span class="string">"100"</span> 最大排队数量，当同时连接数量达到maxThreads时，还可以接收排队的连接数量，超过这个数量，直接返回拒绝连接</div><div class="line">enableLookups=false 是否反查域名，配置为false可以提高处理能力</div><div class="line">connectionTimeout=30000 网络连接超时，单位：毫秒，设置为0表示永不超时</div><div class="line">maxKeepAliveRequest=<span class="string">"1"</span> 等待响应次数，每个连接只响应一次就关闭，这样就不会等待timeout,而产生大量的TIME_WAIT连接</div><div class="line">buffersize=<span class="string">"2048"</span>  输入流缓冲大小</div><div class="line">compression=<span class="string">"off"</span>  压缩传输，取值on/off/force</div></pre></td></tr></table></figure>
+
+					</div>
+
+			  <!-- about -->
 			  
 		</div>
 
@@ -147,10 +147,16 @@
 
 		<div class="comment-section">
   
+  
+
 
 </div>
 	</div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
 	
 
 </div>
