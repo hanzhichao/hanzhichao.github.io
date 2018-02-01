@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | 韩志超</title>
+  <title>开发日志管理平台--未完成 | 韩志超</title>
   <meta name="author" content="Han Zhichao">
   
   <meta name="description" content="测试开发">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="开发日志管理平台--未完成"/>
   <meta property="og:site_name" content="韩志超"/>
 
   
@@ -114,31 +114,48 @@
 	  <div class="container" >
 	    <div class="row">
 	
-	<div class="col-md-9 center-content">
+	<div class="col-md-9">
 	
 
 		<div class="content">
 			<!-- index -->
 		   
-			  	<h2>归档</h2>
-		  		
-	              <p class="archive-item">
-						<a href="../../2017/12/21/ui-checker,UI自动化测试框架分享.html" class="archive-title">uc-checker,UI自动化测试框架分享</a><span class="archive post-time">2017-12-21</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/JVM工作原理.html" class="archive-title">JVM工作原理</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/Tomcat分析调优.html" class="archive-title">tomcat</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/OSI 7层网络模型.html" class="archive-title">osi</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-			  <!-- post -->
+
+			  		<h2>开发日志管理平台--未完成</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:34:04</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>#settting.py<br>STATICFILES_DIRS = (<br>    os.path.join(BASE_DIR, “static”),<br>)</p>
+<h1 id="url-py"><a href="#url-py" class="headerlink" title="url.py"></a>url.py</h1><p>from django.conf.urls import include, url<br>from django.contrib import admin<br>from log.views import *</p>
+<p>urlpatterns = [<br>    url(r’^admin/‘, include(admin.site.urls)),<br>    url(r’^$’, IndexView.as_view(), name=”home”),<br>]</p>
+<h1 id="log-views-py"><a href="#log-views-py" class="headerlink" title="log/views.py"></a>log/views.py</h1><p>import paramiko<br>import logging<br>import json<br>from django.views.generic import ListView</p>
+<p>def _get_log():<br>    item_list = []<br>    ssh = paramiko.SSHClient()<br>    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())<br>    ssh.connect(‘192.168.100.241’, 22, ‘root’, ‘1234567’)<br>    stdin, stdout, stderr = ssh.exec_command(‘tail -500 /tmp/ERROR.20170922.log’)<br>    out = stdout.readlines()<br>    item_list = []<br>    for i in out:<br>        i = i.strip()<br>        if i:<br>            logging.error(“%s is” % i )<br>            i = i.split(“\t”)<br>            logging.error(len(i))<br>            logging.error(“———–”)</p>
+<pre><code>        # if not logging.error(i[-1]):
+        #     print logging.error(i)
+        if len(i) &gt; 12:
+            pass
+            # logging.error(i[11])
+            # data = json.loads(i[11][1:-1].replace(&apos;\\&apos;, &apos;&apos;))
+            # i[11] = json.dumps(data, indent=1)
+        else:
+            pass
+        item_list.append(i)
+return item_list
+</code></pre><p>class IndexView(ListView):<br>    template_name = “log/index.html”<br>    context_object_name = “item_list”</p>
+<pre><code>def get_queryset(self):
+    return _get_log()
+
+def get_context_data(self, **kwargs):
+
+    return super(IndexView, self).get_context_data(**kwargs)
+</code></pre>
+					</div>
+
+			  <!-- about -->
 			  
 		</div>
 
@@ -147,10 +164,16 @@
 
 		<div class="comment-section">
   
+  
+
 
 </div>
 	</div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
 	
 
 </div>

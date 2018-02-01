@@ -1,0 +1,229 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django开发博客系统-版本三 | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Django开发博客系统-版本三"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Django开发博客系统-版本三</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:33:13</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>根据Django of examples 1~3章开发 django==1.11.6</p>
+<h1 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py"></a>settings.py</h1><p>SITE_ID = 1</p>
+<p>STATICFILES_DIRS = (<br>    os.path.join(BASE_DIR, “static”),<br>)</p>
+<h1 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h1><p>EMAIL_BACKEND = ‘django.core.mail.backends.smtp.EmailBackend’<br>EMAIL_USE_TLS = False<br>EMAIL_HOST = ‘smtp.sina.com’<br>EMAIL_PORT = 25<br>EMAIL_HOST_USER = ‘test_results@sina.com’<br>EMAIL_HOST_PASSWORD = ‘hanzhichao123’<br>DEFAULT_FROM_EMAIL = ‘Test Results<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#116;&#101;&#x73;&#116;&#x5f;&#x72;&#x65;&#115;&#x75;&#108;&#x74;&#x73;&#x40;&#x73;&#105;&#x6e;&#x61;&#46;&#x63;&#111;&#x6d;">&#116;&#101;&#x73;&#116;&#x5f;&#x72;&#x65;&#115;&#x75;&#108;&#x74;&#x73;&#x40;&#x73;&#105;&#x6e;&#x61;&#46;&#x63;&#111;&#x6d;</a>‘</p>
+<h1 id="urls-py"><a href="#urls-py" class="headerlink" title="urls.py"></a>urls.py</h1><p>from django.conf.urls import url, include<br>from django.contrib import admin<br>from django.contrib.sitemaps.views import sitemap<br>from blog.sitemaps import PostSitemap<br>sitemaps = &#123;<br>    ‘posts’: PostSitemap,<br>&#125;<br>urlpatterns = [<br>    url(r’^admin/‘, admin.site.urls),<br>    url(r’^blog/‘, include(‘blog.urls’,<br>                           namespace=’blog’,<br>                           app_name=’blog’)),<br>    url(r’^sitemap.xml$’, sitemap, &#123;’sitemaps’: sitemaps&#125;, name=’django.contrib.sitemaps.views.sitemap’),<br>    url(r’^markdownx/‘, include(‘markdownx.urls’)),<br>]</p>
+<p>#blog/models.py</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>from <strong>future</strong> import unicode_literals<br>from django.db import models<br>from django.urls import reverse<br>from django.utils import timezone<br>from django.contrib.auth.models import User<br>from taggit.managers import TaggableManager<br>class PublishedManager(models.Manager):<br>    def get_queryset(self):<br>        return super(PublishedManager, self).get_queryset().filter(status=’published’)<br>class Post(models.Model):<br>    STATUS_CHOICES = (<br>        (‘draft’, ‘Draft’),<br>        (‘published’, ‘Published’),<br>    )<br>    tags = TaggableManager()<br>    title = models.CharField(max_length=250)<br>    slug = models.SlugField(max_length=250, unique_for_date=’publish’)<br>    author = models.ForeignKey(User, related_name=’blog_posts’)<br>    body = models.TextField()<br>    publish = models.DateTimeField(default=timezone.now)<br>    created = models.DateTimeField(auto_now_add=True)<br>    updated = models.DateTimeField(auto_now=True)<br>    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=’draft’)<br>    objects = models.Manager()  # 自定义Manager<br>    published = PublishedManager()<br>    class Meta:<br>        ordering = (‘-publish’,)<br>    def <strong>unicode</strong>(self):<br>        return self.title<br>    def get_absolute_url(self):<br>        current_tz = timezone.get_current_timezone()<br>        db_local_time = current_tz.normalize(self.publish)<br>        return reverse(‘blog:post_detail’, args=[<br>            db_local_time.year,<br>            db_local_time.strftime(‘%m’),<br>            db_local_time.strftime(‘%d’),<br>            self.slug<br>        ])<br>class Comment(models.Model):<br>    post = models.ForeignKey(Post, related_name=’comments’)<br>    name = models.CharField(max_length=80)<br>    email = models.EmailField()<br>    body = models.TextField()<br>    created = models.DateTimeField(auto_now_add=True)<br>    updated = models.DateTimeField(auto_now=True)<br>    active = models.BooleanField(default=True)<br>    class Meta:<br>        ordering = (‘created’,)<br>    def <strong>unicode</strong>(self):<br>        return ‘Comment by &#123;&#125; on &#123;&#125;’.format(self.name, self.post)</p>
+<p>#blog/admin.py</p>
+<h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>from <strong>future</strong> import unicode_literals<br>from django.contrib import admin<br>from .models import Post, Comment<br>class PostAdmin(admin.ModelAdmin):<br>    list_display = (‘title’, ‘slug’, ‘author’, ‘publish’, ‘status’)<br>    list_filter = (‘status’, ‘created’, ‘publish’, ‘author’)<br>    search_fields = (‘title’, ‘body’)<br>    prepopulated_fields = &#123;’slug’: (‘title’,)&#125;<br>    raw_id_fields = (‘author’,)  # 显示外键的详细信息<br>    date_hierarchy = ‘publish’  # 快捷搜索<br>    ordering = [‘status’, ‘publish’]  # 默认排序<br>class CommentAdmin(admin.ModelAdmin):<br>    list_display = (‘name’, ‘email’, ‘post’, ‘created’, ‘active’)<br>    list_filter = (‘active’, ‘created’, ‘updated’)<br>    search_fields = (‘name’, ‘email’, ‘body’)<br>admin.site.register(Post, PostAdmin)<br>admin.site.register(Comment, CommentAdmin)</p>
+<p>#blog/forms.py</p>
+<p>from django import forms<br>from .models import Comment<br>from markdownx.fields import MarkdownxFormField</p>
+<p>class EmailPostForm(forms.Form):<br>    name = forms.CharField(max_length=25)<br>    email = forms.EmailField()<br>    to = forms.EmailField()<br>    comments = forms.CharField(required=False,<br>                               widget=forms.Textarea)<br>class CommentForm(forms.ModelForm):<br>    class Meta:<br>        model = Comment<br>        fields = (‘name’, ‘email’, ‘body’)<br>class EditForm(forms.Form):<br>    myfield = MarkdownxFormField()</p>
+<p>#blog/views.py</p>
+<h1 id="coding-utf-8-2"><a href="#coding-utf-8-2" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>from <strong>future</strong> import unicode_literals<br>from django.core.mail import send_mail<br>from django.shortcuts import render, get_object_or_404<br>from .models import Post<br>from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger<br>from .forms import EmailPostForm, CommentForm, EditForm<br>from taggit.models import Tag<br>from django.db.models import Count<br>def post_list(request, tag_slug=None):<br>    object_list = Post.published.all()<br>    tag = None<br>    if tag_slug:<br>        tag = get_object_or_404(Tag, slug=tag_slug)<br>        object_list = object_list.filter(tags<strong>in=[tag])<br>    paginator = Paginator(object_list, 3)<br>    page = request.GET.get(‘page’)<br>    try:<br>        posts = paginator.page(page)<br>    except PageNotAnInteger:<br>        posts = paginator.page(1)<br>    except EmptyPage:<br>        posts = paginator.page(paginator.num_pages)<br>    return render(request, ‘blog/post/list.html’, &#123;<br>        ‘page’: page,<br>        ‘posts’: posts<br>    &#125;)<br>def post_detail(request, year, month, day, post):<br>    post = get_object_or_404(Post, slug=post,<br>                             status=’published’,<br>                             publish</strong>year=year,<br>                             publish<strong>month=month,<br>                             publish</strong>day=day)<br>    comments = post.comments.filter(active=True)<br>    new_comment = None<br>    if request.method == ‘POST’:<br>        comment_form = CommentForm(data=request.POST)<br>        form = EditForm(data=request.POST)<br>        if comment_form.is_valid():<br>            new_comment = comment_form.save(commit=False)<br>            new_comment.post = post<br>            new_comment.save()<br>    else:<br>        form = EditForm()<br>        comment_form = CommentForm()</p>
+<pre><code># List of similar posts
+post_tags_ids = post.tags.values_list(&apos;id&apos;, flat=True)
+similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+similar_posts = similar_posts.annotate(same_tags=Count(&apos;tags&apos;)).order_by(&apos;-same_tags&apos;, &apos;-publish&apos;)[:4]
+return render(request, &apos;blog/post/detail.html&apos;, &amp;#123;
+    &apos;post&apos;: post,
+    &apos;comments&apos;: comments,
+    &apos;new_comment&apos;: new_comment,
+    &apos;comment_form&apos;: comment_form,
+    &apos;similar_posts&apos;: similar_posts,
+    &apos;form&apos;: form,
+&amp;#125;)
+</code></pre><p>def post_share(request, post_id):<br>    post = get_object_or_404(Post, id=post_id, status=’published’)<br>    cd = None<br>    if request.method == ‘POST’:<br>        form = EmailPostForm(request.POST)<br>        if form.is_valid():<br>            cd = form.cleaned_data<br>            post_url = request.build_absolute_uri(<br>                post.get_absolute_url()<br>            )<br>            subject = ‘&#123;&#125; (&#123;&#125;) recomends you reading “&#123;&#125;”‘\<br>                .format(cd[‘name’], cd[‘email’], post.title)<br>            message = ‘Read “&#123;&#125;” at &#123;&#125;\n\n&#123;&#125;\’s comments: &#123;&#125;’\<br>                .format(post.title, post_url, cd[‘name’], cd[‘comments’])<br>            send_mail(subject, message, ‘test_results@sina.com’, [cd[‘to’]])<br>            sent = True<br>    else:<br>        form = EmailPostForm()<br>    return render(request, ‘blog/post/share.html’, &#123;<br>        ‘post’: po<br>        ‘form’: form,<br>    &#125;)</p>
+<p>#blog/urls.py<br>from django.conf.urls import url, include<br>from . import views<br>from .feeds import LatestPostsFeed<br>urlpatterns = [<br>    url(r’^$’, views.post_list, name=’post_list’),<br>    url(r’^(?P<year>\d&#123;4&#125;)/(?P<month>\d&#123;2&#125;)/(?P<day>\d&#123;2&#125;)/(?P<post>[-\w]+)/$’,<br>        views.post_detail, name=’post_detail’),<br>    url(r’^(?P<post_id>\d+)/share/$’, views.post_share, name=’post_share’),<br>    url(r’^tag/(?P<tag_slug>[-\w]+)/$’, views.post_list, name=’post_list_by_tag’),<br>    url(r’feed/$’, LatestPostsFeed(), name=’post_feed’),<br>]</tag_slug></post_id></post></day></month></year></p>
+<p>#blog/sitemaps.py<br>from django.contrib.sitemaps import Sitemap<br>from .models import Post<br>class PostSitemap(Sitemap):<br>    changefreq = ‘weekly’<br>    priority = 0.9<br>    def items(self):<br>        return Post.published.all()<br>    def lastmode(self, obj):<br>        return obj.publish</p>
+<p>#blog/feeds.py<br>from django.contrib.syndication.views import Feed<br>from django.template.defaultfilters import truncatewords<br>from .models import Post<br>class LatestPostsFeed(Feed):<br>    title = ‘My blog’<br>    link = ‘/blog’<br>    description = ‘New posts of my blog.’<br>    def items(self):<br>        return Post.published.all()[:5]<br>    def item_title(self, item):<br>        return item.title<br>    def item_description(self, item):<br>        return truncatewords(item.body, 30)</p>
+<h1 id="blog-templatetags-blog-tags-py"><a href="#blog-templatetags-blog-tags-py" class="headerlink" title="blog/templatetags/blog_tags.py"></a>blog/templatetags/blog_tags.py</h1><p>from django import template<br>from django.db.models import Count<br>from django.utils.safestring import mark_safe<br>from ..models import Post<br>import markdown<br>from taggit.models import Tag<br>register = template.Library()<br>@register.simple_tag<br>def total_posts():<br>    return Post.published.count()<br>@register.inclusion_tag(‘blog/post/latest_posts.html’)<br>def show_latest_posts(count=5):<br>    latest_posts = Post.published.order_by(‘-publish’)[:count]<br>    return &#123;’latest_posts’: latest_posts&#125;<br>@register.assignment_tag<br>def get_most_commented_posts(count=5):<br>    return Post.published.annotate(total_comments=Count(‘comments’)).order_by(‘-total_comments’)[:count]<br>@register.filter(name=’markdown’)<br>def markdown_format(text):<br>    return mark_safe(markdown.markdown(text))<br>@register.assignment_tag<br>def tag_cloud():<br>    return Tag.objects.all()</p>
+<p>#blog/templates/blog/base.html<br>&#123;% load staticfiles %&#125;<br>&#123;% load blog_tags %&#125;<br>&lt;!DOCTYPE html&gt;</p>
+<p><html></html></p>
+<p><head><br>  <title>&#123;% block title %&#125;&#123;% endblock %&#125;</title><br>  <link href="&#123;% static " css="" bootstrap.min.css"="" %&#125;"="" rel="stylesheet"><br></head></p>
+<p><body></body></p>
+<p><div class="container"><br>  <div class="col-md-9"><br>    &#123;% block content %&#125;<br>    &#123;% endblock %&#125;<br>  </div><br>  <div class="col-md-3 bg-info"><br>    <h2><a href="&#123;% url 'blog:post_list' %&#125;">My blog</a></h2><br>      <p>This is my blog. I’ve written &#123;% total_posts %&#125; posts so far.</p><br>      <p><a href="&#123;% url 'blog:post_feed' %&#125;">Subscribe to my RSS feed</a></p><br>      <h3>Latest posts</h3><br>      &#123;% show_latest_posts 3 %&#125;<br>      <h3>Most commented posts</h3><br>      &#123;% get_most_commented_posts as most_commented_posts %&#125;<br>      <ul><br>          &#123;% for post in most_commented_posts %&#125;<br>              <li><br>              <a href="&#123;&#123; post.get_absolute_url &#125;&#125;">&#123;&#123; post.title &#125;&#125;</a><br>              </li><br>          &#123;% endfor %&#125;<br>      </ul><br>      <h3>All Tags</h3><br>  &#123;% tag_cloud as tag_list %&#125;<br>  <ul><br>      &#123;% for tag in tag_list %&#125;<br>      <li><a href="&#123;% url " blog:post_list_by_tag"="" tag.slug="" %&#125;"="">&#123;&#123; tag &#125;&#125;</a></li><br>      &#123;% endfor %&#125;<br>  </ul><br>  </div><br></div><br><br></p>
+<p>#blog/templates/blog/pagination.html<br><span class="text-muted"><br>    &#123;% if page.has_previous %&#125;<br>        <a href="?page=&#123;&#123; page.previous_page_number &#125;&#125;">Previous</a><br>    &#123;% endif %&#125;<br>    <span class="text-info">Page&#123;&#123; page.number &#125;&#125; of &#123;&#123; page.paginator.num_pages &#125;&#125;</span><br>    &#123;% if page.has_next %&#125;<br>        <a href="?page=&#123;&#123; page.next_page_number &#125;&#125;">Next</a><br>    &#123;% endif %&#125;<br></span></p>
+<p>#blog/templates/blog/post/list.html<br>&#123;% extends “blog/base.html” %&#125;<br>&#123;% load blog_tags %&#125;<br>&#123;% block title %&#125;My Blog&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>    </p><h1>My Blog</h1><hr><br>    &#123;% if tag %&#125;<br>        <h2>Posts tagged with “&#123;&#123; tag.name &#125;&#125;”</h2><br>    &#123;% endif %&#125;<br>  &#123;% for post in posts %&#125;<br>      <div class="panel panel-default"><div class="panel-body"><br>    <h2><br>      <a href="&#123;&#123; post.get_absolute_url &#125;&#125;"><br>        &#123;&#123; post.title &#125;&#125;<br>      </a><br>    </h2><br>      <p>Tags:<br>      &#123;% for tag in post.tags.all %&#125;<br>          <a class="label label-default" href="&#123;% url " blog:post_list_by_tag"="" tag.slug="" %&#125;"="">&#123;&#123; tag.name &#125;&#125;</a><br>          &#123;% if not forloop.last %&#125;&nbsp;&#123;% endif %&#125;<br>          &#123;% endfor %&#125;<br>          </p><br>    <p class="date"><br>      Published &#123;&#123; post.publish &#125;&#125; by &#123;&#123; post.author &#125;&#125;<br>    </p><br>    &#123;&#123; post.body|markdown|truncatechars_html:30 &#125;&#125;<br>      </div></div><br>  &#123;% endfor %&#125;<br>  &#123;% include “blog/pagination.html” with page=posts %&#125;<br>&lt;<br>&#123;% endblock %&#125;<p></p>
+<p>#blog/templates/blog/post/detail.html<br>&#123;% extends “blog/base.html” %&#125;<br>&#123;% load blog_tags %&#125;<br>&#123;% block title %&#125;&#123;&#123; post.title &#125;&#125;&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>  </p><h1>&#123;&#123; post.title &#125;&#125;</h1><br>  <p class="date"><br>    Published &#123;&#123; post.publish &#125;&#125; by &#123;&#123; post.author &#125;&#125;<br>  </p><br>  &#123;&#123; post.body|markdown &#125;&#125;<br>    <p><br>    <a href="&#123;% url 'blog:post_share' post.id %&#125;">Share this post</a><br>    </p><br>    <h2>Similar posts</h2><br>    &#123;% for post in similar_posts %&#125;<br>        <p><br>        <a href="&#123;&#123; post.get_absolute_url &#125;&#125;">&#123;&#123; post.title &#125;&#125;</a><br>        </p><br>        &#123;% empty %&#125;<br>        There are no similar posts yet.<br>    &#123;% endfor %&#125;<br>    <p><br>    &#123;% with comments.count as total_comments %&#125;<br>        </p><h2><br>        &#123;&#123; total_comments &#125;&#125; comment&#123;&#123; total_comments|pluralize &#125;&#125;<br>        </h2><br>    &#123;% endwith %&#125;<br>    &#123;% for comment in comments %&#125;<br>        <div class="comment"><br>        <hr><br>        <p class="info"><br>            Comment &#123;&#123; forloop.counter &#125;&#125; by &#123;&#123; comment.name &#125;&#125;<br>            &#123;&#123; comment.created &#125;&#125;<br>        </p><br>        &#123;&#123; comment.body|linebreaks &#125;&#125;<br>        </div><br>        &#123;% empty %&#125;<br>        <p>There are no comments yet.</p><br>    &#123;% endfor %&#125;<br>    &#123;% if new_comment %&#125;<br>        <h2>Your comment has been added.</h2><br>    &#123;% else %&#125;<br>        <h2>Add a new comment</h2><br>        <form action="." method="post"><br>        &#123;&#123; comment_form.as_p &#125;&#125;<br>        &#123;% csrf_token %&#125;<br>        <p><input type="submit" value="Add comment"></p><br>        </form><br>        <form method="POST" action="">&#123;% csrf_token %&#125;&#123;&#123; form.as_p &#125;&#125;</form><br>&#123;&#123; form.media &#125;&#125;<br>    &#123;% endif %&#125;<br>&#123;% endblock %&#125;<p></p>
+<p>#blog/templates/blog/post/latest_posts.html</p>
+<p><ul><br>    &#123;% for post in latest_posts %&#125;<br>        <li><br>        <a href="&#123;&#123; post.get_absolute_url &#125;&#125;">&#123;&#123; post.title &#125;&#125;</a><br>        </li><br>    &#123;% endfor %&#125;<br></ul></p>
+<p>#blog/templates/blog/post/share.html<br>&#123;% extends “blog/base.html” %&#125;<br>&#123;% block title %&#125;Share a post&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>    &#123;% if sent %&#125;<br>        </p><h1>Email successfully sent</h1><br>        <p><br>        “&#123;&#123; post.title &#125;&#125;” was successfully sent to &#123;&#123; cd.to &#125;&#125;.<br>        </p><br>    &#123;% else %&#125;<br>        <h1>Share “&#123;&#123; post.title &#125;&#125;” by e-mail</h1><br>        <form action="." method="post"><br>        &#123;&#123; form.as_p &#125;&#125;<br>        &#123;% csrf_token %&#125;<br>        <input type="submit" value="Send e-mail"><br>        </form><br>    &#123;% endif %&#125;<br>&#123;% endblock %&#125;<p></p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

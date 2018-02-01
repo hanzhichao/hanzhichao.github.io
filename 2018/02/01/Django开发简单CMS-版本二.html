@@ -1,0 +1,241 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django开发简单CMS-版本二 | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Django开发简单CMS-版本二"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Django开发简单CMS-版本二</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:49:28</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>Django 1.8.3</p>
+<h2 id="项目级"><a href="#项目级" class="headerlink" title="项目级"></a>项目级</h2><h3 id="setting-py"><a href="#setting-py" class="headerlink" title="setting.py"></a>setting.py</h3><p>STATICFILES_DIRS = (<br>    os.path.join(BASE_DIR, “static”),<br>)</p>
+<h3 id="urls-py"><a href="#urls-py" class="headerlink" title="urls.py"></a>urls.py</h3><p>from django.conf.urls import include, url<br>from django.contrib import admin<br>urlpatterns = [<br>    url(r’^admin/‘, include(admin.site.urls)),<br>    url(r’^cms/‘, include(‘cms.urls’)),<br>]</p>
+<h2 id="应用级"><a href="#应用级" class="headerlink" title="应用级"></a>应用级</h2><h3 id="urls-py-1"><a href="#urls-py-1" class="headerlink" title="urls.py"></a>urls.py</h3><p>from django.conf.urls import patterns, url<br>from cms.views import home, category, article, search<br>urlpatterns = [<br>    url(r’^$’, home, name=’cms-home’),<br>    url(r’^category/(?P<slug>[-\w]+)/$’, category, name=’cms-category’),<br>    url(r’^article/(?P<slug>[-\w]+)/$’, article, name=’cms-article’),<br>    url(r’^search/$’, search, name=”cms-search”),<br>]</slug></slug></p>
+<h3 id="views-py"><a href="#views-py" class="headerlink" title="views.py"></a>views.py</h3><h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding=utf-8"></a>coding=utf-8</h1><p>from cms.models import Article, Category<br>from django.shortcuts import render_to_response, get_object_or_404<br>from django.db.models import Q<br>def home(request):  # catrgory list<br>    categories = Category.objects.all()<br>    return render_to_response(“cms/index.html”, &#123;’categories’: categories&#125;)<br>def category(request, slug):  # article list<br>    “””Given a category slug,display all items in a category.”””<br>    categories = Category.objects.all()<br>    cur_category = get_object_or_404(Category, slug=slug)<br>    article_list = Article.objects.filter(category=cur_category)<br>    heading = cur_category.label<br>    return render_to_response(“cms/category.html”, locals())  # 返回所有本地变量<br>def article(request, slug):  # article detail # 怎么设计的不同分类可重复？<br>    categories = Category.objects.all()<br>    cur_article = get_object_or_404(Article, slug=slug)<br>    return render_to_response(“cms/article.html”, locals())  # 返回所有本地变量<br>def search(request):<br>    “””<br>    Return a list of stories that match the provided search term<br>    in either the title or the main content.<br>    “””<br>    categories = Category.objects.all()<br>    if ‘q’ in request.GET:<br>        term = request.GET(‘q’)<br>        story_list = Article.objects.filter(Q(title<strong>contains=term) | Q(markdown_content</strong>contains=term))<br>        heading = “Search results”<br>    return render_to_response(“cms/category.html”, locals())</p>
+<h3 id="modles-py"><a href="#modles-py" class="headerlink" title="modles.py"></a>modles.py</h3><h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="coding=utf-8"></a>coding=utf-8</h1><p>from <strong>future</strong> import unicode_literals<br>from django.db import models<br>import datetime<br>from django.db.models import permalink<br>from django.contrib.auth.models import User<br>from django.utils.encoding import python_2_unicode_compatible<br>from markdown import markdown<br>from django.contrib import admin<br>VIEWABLE_STATUS = [3, 4]</p>
+<h1 id="python-2-unicode-compatible-向后兼容django版本"><a href="#python-2-unicode-compatible-向后兼容django版本" class="headerlink" title="@python_2_unicode_compatible  # 向后兼容django版本"></a>@python_2_unicode_compatible  # 向后兼容django版本</h1><p>class Category(models.Model):<br>    “””文章分类”””<br>    label = models.CharField(blank=True, max_length=50)<br>    slug = models.SlugField()<br>    class Meta:<br>        verbose_name_plural = ‘分类’<br>    @permalink<br>    def get_absolute_url(self):  # 获取reverse后的链接</p>
+<pre><code>    # return (&apos;cms-article&apos;, (), &amp;#123;&apos;slug&apos;: self.slug&amp;#125;)
+    return &apos;cms-category&apos;, (), &amp;#123;&apos;slug&apos;: self.slug&amp;#125;  # 尝试一下是否可以
+def __unicode__(self):
+    return self.label
+</code></pre><h1 id="python-2-unicode-compatible-向后兼容django版本，可以使用-def-str"><a href="#python-2-unicode-compatible-向后兼容django版本，可以使用-def-str" class="headerlink" title="@python_2_unicode_compatible  # 向后兼容django版本，可以使用 def str()"></a>@python_2_unicode_compatible  # 向后兼容django版本，可以使用 def <strong>str</strong>()</h1><p>class Article(models.Model):<br>    “”” 文章页面 “””<br>    STATUS_CHOICES = &#123;<br>        (1, ‘草稿’),<br>        (2, ‘待审批’),<br>        (3, ‘已发布’),<br>        (4, ‘存档’)<br>    &#125;<br>    title = models.CharField(‘标题’, max_length=256)<br>    slug = models.SlugField(‘网址’, max_length=256, db_index=True)  # 建立数据库索引<br>    category = models.ForeignKey(Category)<br>    markdown_content = models.TextField()<br>    html_content = models.TextField(editable=False)  # invisible</p>
+<pre><code># author = models.ForeignKey(User, blank=True, null=True)
+author = models.ForeignKey(&apos;auth.User&apos;, blank=True, null=True, verbose_name=&apos;作者&apos;)
+status = models.IntegerField(&apos;状态&apos;, choices=STATUS_CHOICES, default=1)
+# created = models.DateTimeField(default=datetime.datetime.now)  # 可以杜撰
+created = models.DateTimeField(&apos;创建时间&apos;, auto_now_add=True)  # 第一次创建更改
+# modified = models.DateTimeField(default=datetime.datetime.now) # 可以杜撰
+modified = models.DateTimeField(&apos;最后修改时间&apos;, auto_now=True)  # 每次保存时间
+class Meta:
+    ordering = [&apos;modified&apos;]
+    verbose_name = &apos;文章&apos;  # 单数 中文下显示
+    verbose_name_plural = &apos;文章&apos;  # 复数，中文下显示
+@permalink
+def get_absolute_url(self):  # 获取reverse后的链接
+    # return (&apos;cms-article&apos;, (), &amp;#123;&apos;slug&apos;: self.slug&amp;#125;)
+    return &apos;cms-article&apos;, (), &amp;#123;&apos;slug&apos;: self.slug&amp;#125;  # 尝试一下是否可以
+# def __unicode__(self):  # 在Python3中用 __str__ 代替 __unicode__
+#     return self.title
+def save(self, *args, **kws):  # 转换markdown内容为html内容
+    self.html_content = markdown(self.markdown_content)
+    self.modified = datetime.datetime.now()
+    super(Article, self).save()
+</code></pre><p>class ViewableManager(models.Manager):<br>    def get_query_set(self):<br>        default_queryset = super(ViewableManager, self).get_query_set()<br>        return default_queryset.filter(status__in=VIEWABLE_STATUS)</p>
+<h3 id="admin-py"><a href="#admin-py" class="headerlink" title="admin.py"></a>admin.py</h3><p>from django.contrib import admin<br>from cms.models import Article, Category</p>
+<p>class ArticleAdmin(admin.ModelAdmin):<br>    list_display = (‘title’, ‘author’, ‘status’, ‘created’, ‘modified’)<br>    search_fields = (‘title’, ‘content’)<br>    list_filter = (‘status’, ‘author’, ‘category’, ‘created’, ‘modified’)</p>
+<pre><code># prepopulated_fields = &amp;#123;&apos;slug&apos;: (&apos;title&apos;,)&amp;#125;  # 同步slug与title相同
+</code></pre><p>class CategoryAdmin(admin.ModelAdmin):<br>    pass</p>
+<pre><code># prepopulated_fields = &amp;#123;&apos;slug&apos;: (&apos;label&apos;,)&amp;#125;  # 同步slug与title相同
+</code></pre><p>admin.site.register(Article, ArticleAdmin)<br>admin.site.register(Category, CategoryAdmin)</p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>&lt;!DOCTYPE html&gt;</p>
+<p><html lang="en"></html></p>
+<p><head><br>    <meta charset="UTF-8"><br>    &#123;% load staticfiles %&#125;<br>    <link rel="stylesheet" href="&#123;% static 'css/bootstrap.min.css' %&#125;"><br>    <title>&#123;% block title %&#125;&#123;% endblock %&#125;</title><br></head></p>
+<p><body><br>    <div class="container" style="margin-top: 10px;"><br>        <nav class="navbar navbar-default"><br>            <div class="nav-header"><br>                <div class="navbar-brand"><a href="#">MY-CMS</a></div><br>            </div><br>            <ul class="nav navbar-nav"><br>                <li><a href="&#123;% url 'cms-home' %&#125;">首页</a> </li><br>                &#123;% for category in categories %&#125;<br>                    <li><a href="&#123;&#123; category.get_absolute_url &#125;&#125;">&#123;&#123; category &#125;&#125;</a></li><br>                &#123;% endfor %&#125;<br>            </ul><br>            <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;"><br>                <li><a href="../admin/" class="navbar-link">登录</a></li><br>            </ul><br>            <form class="navbar-form" action="&#123;% url 'cms-search' %&#125;" method="get">  <!--1.5之后要用引号--><br>                <input class="form-control" type="text" name="q" placeholder="Search"><br>            </form><br>        </nav><br>    </div><br>    <div class="container"><br>        &#123;% block content %&#125;<br>        &#123;% endblock %&#125;<br>    </div><br></body><br></p>
+<h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><p>&#123;% extends “cms/base.html” %&#125;<br>&#123;% block title %&#125;&#123;&#123; story.title &#125;&#125;&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>    &#123;% if heading %&#125;<br>        </p><h1>&#123;&#123; heading &#125;&#125;</h1><br>    &#123;% endif %&#125;<br>    <div class="jumbotron"><br>        <h1>Welcome,Friend</h1><br>        <p><br>           This is a simple hero unit,<br>            a simple jumbotron-style component for calling extra attention<br>            to featured content or information.<br>        </p><br>        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p><br>    </div><br>    <div class="page-header"><br>        <h1>首页<small>（分类列表）</small></h1><br>    </div><br>    <ol class="breadcrumb"><br>    <li><a href="&#123;% url 'cms-home' %&#125;">首页</a> </li><br></ol><br>    <div class="page"><br>         <ul><br>        &#123;% for category in categories %&#125;<br>            <li><a href="&#123;&#123; category.get_absolute_url &#125;&#125;">&#123;&#123; category.label &#125;&#125;</a> </li><br>        &#123;% endfor %&#125;<br>    </ul><br>    </div><br>&#123;% endblock %&#125;<p></p>
+<h3 id="article-html"><a href="#article-html" class="headerlink" title="article.html"></a>article.html</h3><p>&#123;% extends “cms/base.html” %&#125;<br>&#123;% block title %&#125;&#123;&#123; article.title &#125;&#125;&#123;% endblock %&#125;<br>&#123;% block content %&#125;</p>
+<p><div class="page-header"><br>    <h1>&#123;&#123; cur_article.title &#125;&#125;</h1><br></div></p>
+<p><ol class="breadcrumb"><br>    <li><a href="&#123;% url 'cms-home' %&#125;">首页</a> </li><br>    <li><a href="&#123;% url 'cms-category' cur_article.category.slug %&#125;">&#123;&#123; cur_article.category &#125;&#125;</a> </li><br>    <li><a href="&#123;&#123; cur_article.get_absolute_url &#125;&#125;">&#123;&#123; cur_article.title &#125;&#125;</a> </li><br></ol></p>
+<p><div class="page"><br>    &#123;&#123; cur_article.html_content|safe &#125;&#125;<br>    <p class="small">最后更新： &#123;&#123; cur_article.modified &#125;&#125;</p><br></div><br>&#123;% endblock %&#125;</p>
+<p>###category.html<br>&#123;% extends “cms/base.html” %&#125;<br>&#123;% block title %&#125;&#123;&#123; story.title &#125;&#125;&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>    &#123;% if heading %&#125;<br>        <div class="page-header"><br>        <h1>&#123;&#123; heading &#125;&#125;</h1><br>        </div><br>    &#123;% endif %&#125;</p>
+<p><ol class="breadcrumb"></ol></p>
+<p><li><a href="&#123;% url 'cms-home' %&#125;">首页</a> </li></p>
+<p><li><a href="&#123;&#123; cur_category.get_absolute_url &#125;&#125;">&#123;&#123; cur_category &#125;&#125;</a> </li><br></p>
+<p><div class="page"><br>    <ul><br>        &#123;% for article in article_list %&#125;<br>            <li><a href="&#123;&#123; article.get_absolute_url &#125;&#125;">&#123;&#123; article.title &#125;&#125;</a> </li><br>        &#123;% endfor %&#125;<br>    </ul><br></div><br>&#123;% endblock %&#125;</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

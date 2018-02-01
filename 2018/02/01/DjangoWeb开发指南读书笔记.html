@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | 韩志超</title>
+  <title>DjangoWeb开发指南读书笔记 | 韩志超</title>
   <meta name="author" content="Han Zhichao">
   
   <meta name="description" content="测试开发">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="DjangoWeb开发指南读书笔记"/>
   <meta property="og:site_name" content="韩志超"/>
 
   
@@ -114,31 +114,113 @@
 	  <div class="container" >
 	    <div class="row">
 	
-	<div class="col-md-9 center-content">
+	<div class="col-md-9">
 	
 
 		<div class="content">
 			<!-- index -->
 		   
-			  	<h2>归档</h2>
-		  		
-	              <p class="archive-item">
-						<a href="../../2017/12/21/ui-checker,UI自动化测试框架分享.html" class="archive-title">uc-checker,UI自动化测试框架分享</a><span class="archive post-time">2017-12-21</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/JVM工作原理.html" class="archive-title">JVM工作原理</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/Tomcat分析调优.html" class="archive-title">tomcat</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/OSI 7层网络模型.html" class="archive-title">osi</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-			  <!-- post -->
+
+			  		<h2>DjangoWeb开发指南读书笔记</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 20:01:43</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>第5章 URL Http 机制和视图</p>
+<p>5.1 URL</p>
+<pre><code>* urlconf
+</code></pre><p>用url替换元组 kwargs参数 和 name</p>
+<pre><code>* 使用多过patterns对象，（1.10以弃用patterns）
+</code></pre><p>urlpatterns+= patterns（）</p>
+<pre><code>* 用include来包含其他url文件，（可以指定namespace）
+</code></pre><p>5.2 http建模:请求，响应和中间件</p>
+<pre><code>* 请求对象----request.GET  request.POST
+* cookies和会话，（sessions）----request.cookies  request.session
+* 其他服务器变量----request.
+
+    * path 资源路径/blog/2017/11/04/
+    * method 请求方法，GET,PUT,POST,DELETE 
+    * FILES 上传的文件
+    * Meta 请求变量
+    * user django的认证用户，激活django的认证机制时才会出现
+    * raw_post_data post原始数据
+* 响应对象
+
+    * response=HttpResponse()
+    * response.write()
+    * response[&quot;content-type&quot;]=&quot;text/csv&quot;
+* 中间件
+</code></pre><p>中间件就是一个python类，他实现了一个特定的接口，定义了一些名为process_request或是process_view这样的方法—-按settings.py中有序</p>
+<pre><code>* 请求中间件---先逐个处理请求中间件，最后再处理views本身
+* 响应中间件---接受一个request和response重新返回一个新的httpresponse
+</code></pre><p>5.3视图与逻辑</p>
+<pre><code>* 就是python函数
+* 通用视图
+* 半通用视图
+* 自定义视图
+
+    * render_to_response
+    * http404
+    * get_object_or_404
+    * get_listor_404
+* 其他观察
+
+    * views中使用，*args **kwargs
+</code></pre><p>第6章 模板和表单处理</p>
+<p>6.1 模板</p>
+<pre><code>* 理解Contexts ---一个类似字典的Contexts对象，views向模板传递变量
+
+    * 上下文处理器 TEMPLATE_CONTEXT_PROCESSORS
+* 模板语言语法
+
+    * 单独命令 --{{ 变量 }}--变量输出
+    * 模块级命令{% if %} {% endif %}
+* 模板过滤器
+* 标签 tag---- if,ifequal,block,include,extends
+
+    * 可以结合过滤器
+    * Blocks和Extends
+    * 包含其他模板include
+</code></pre><p>6.2表单</p>
+<pre><code>* 定义表单
+
+    * forms.Form---简单表单，不关联model
+    * 基于模型的表单---forms.ModelForm---关联Model
+</code></pre><p>class PersonForm(forms.ModelForm):<br>    class Meta:<br>        model = Person</p>
+<pre><code>    * 保存ModelForm ---form.save(),form.save(commet=False)
+
+        * 区别于Model---fields和exclude----两种只能用一个，被忽略的字段必须null=True（运行为null）
+    * 继承表单，多重继承---使用fields或exculde来限制变量
+* 填写表单
+
+    * 绑定的 未绑定的
+    * requests.POST.copy()
+    * initial制定默认的值---last = forms.CharField(max_length=100, required=True,initial=&apos;Smith&apos;)
+* 显示表单 可以通过auto_id 和label_suffix指定 input的id和文本
+
+    * pf = TestForm(auto_id=False, label_suffix=&apos;&apos;)
+    * pf = TestForm(auto_id=%_id, label_suffix=&quot;？&quot;)
+    * 显示全部表单
+
+        * form.as_table---使用&lt;table&gt;标签
+        * from.as_p---使用p标签
+        * form.as_ul---使用ul标签
+        * 可以继承django.forms.util.ErrorList 来自定义错误列表的显示方式
+    * 逐个显示表单
+
+        * Widget---控制显示
+        * middle=forms.CHarField(max_length=100, widget=forms.TextInput(attrs={&apos;size&apos;:3})
+        * 重写一个变量的Widget
+</code></pre><p>class LargeTextareaWidget(forms.Textarea):<br>    def <strong>init</strong>(self, <em>args, **kwargs):<br>        kwargs.setdefault(‘attrs’,{}).update({‘rows’:40,’cols’:100})<br>        super(LargeTextareaWidget, self).<strong>init</strong>(</em>args,**kwargs)</p>
+<p>class LargeTextarea(forms.Field):<br>    widget = LargeTextareaWidget</p>
+<p>#froms.py<br>class ContentForm(forms.Form):<br>    name=forms.CharField()<br>    text = LargeTextarea()</p>
+
+					</div>
+
+			  <!-- about -->
 			  
 		</div>
 
@@ -147,10 +229,16 @@
 
 		<div class="comment-section">
   
+  
+
 
 </div>
 	</div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
 	
 
 </div>

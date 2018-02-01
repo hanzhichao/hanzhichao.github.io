@@ -1,0 +1,246 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django开发相册系统 | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Django开发相册系统"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Django开发相册系统</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:42:07</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="项目级"><a href="#项目级" class="headerlink" title="项目级"></a>项目级</h2><h3 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py"></a>settings.py</h3><p>MEDIA_ROOT = os.path.join(BASE_DIR, ‘media’).replace(‘\‘, ‘/‘)</p>
+<h1 id="DRY-do-not-repeat-yourself-URL"><a href="#DRY-do-not-repeat-yourself-URL" class="headerlink" title="DRY(do not repeat yourself) URL"></a>DRY(do not repeat yourself) URL</h1><p>ROOT_URL = ‘/gallery/‘<br>LOGIN_URL = ROOT_URL + ‘login/‘<br>MEDIA_URL = ROOT_URL + ‘media/‘<br>ADMIN_MEDIA_PREFIX = MEDIA_ROOT + ‘admin/‘</p>
+<p>###urls.py<br>from django.conf.urls import include, url, patterns<br>from book_gallery.settings import ROOT_URL</p>
+<p>urlpatterns = [<br>    url(r’^%s’ % ROOT_URL[1:], include(‘book_gallery.real_urls’)),<br>]</p>
+<h3 id="real-urls-py"><a href="#real-urls-py" class="headerlink" title="real_urls.py"></a>real_urls.py</h3><p>from django.conf.urls import patterns, include, url<br>from django.contrib import admin<br>from book_gallery.settings import ROOT_URL<br>def root_url_processor(request):<br>    return &#123;’ROOT_URL’: ROOT_URL&#125;<br>urlpatterns = patterns(‘’,<br>                       url(r’^admin/‘, include(admin.site.urls), name=admin),<br>                       url(r’^’, include(‘gallery.urls’)),<br>                       )</p>
+<h2 id="应用级"><a href="#应用级" class="headerlink" title="应用级"></a>应用级</h2><h3 id="urls-py"><a href="#urls-py" class="headerlink" title="urls.py"></a>urls.py</h3><p>from django.conf.urls import patterns, include, url<br>from book_gallery import settings<br>from django.contrib import admin<br>from gallery.views import index, ItemList, ItemDetail, PhotosDetail<br>urlpatterns = [<br>    url(r’^admin/‘, include(admin.site.urls), name=’admin’),<br>   url(r’^$’, index, name=’index’),<br>   url(r’items/$’, ItemList.as_view(), name=’item_list’),<br>   url(r’items/(?P<object_id>\d+)/$’, ItemDetail.as_view(), name=’item_detail’),<br>   url(r’photos/(?P<object_id>\d+)/$’, PhotosDetail.as_view(), name=’photos_detail’),<br>    url(r’^media/(?P<path></path>.*)$’, ‘django.views.static.serve’, &#123;’document_root’: settings.MEDIA_ROOT&#125;),<br>]</object_id></object_id></p>
+<h3 id="fields-py"><a href="#fields-py" class="headerlink" title="fields.py"></a>fields.py</h3><h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding:utf-8"></a>coding:utf-8</h1><p>from django.db.models.fields.files import ImageField, ImageFieldFile<br>from PIL import Image  # PIL: Python Image Library<br>import os<br>def _add_thumb(s):<br>    “””<br>    Modifies a string(filename, URL) containing an image filename to insert<br>    ‘.thumb’ before the file extension (which is changed to be ‘.jpg’<br>    “””<br>    parts = s.split(“.”)<br>    parts.insert(-1, “thumb”)<br>    if parts[-1].lower() not in [‘jpg’, ‘jpeg’]:<br>        parts[-1] = ‘jpg’<br>    return “.”.join(parts)  # join()用法 ‘sep’.join(seq)<br>class ThumbnailImageFieldFile(ImageFieldFile):<br>    def _get_thumb_path(self):<br>        return _add_thumb(self.path)<br>    thumb_path = property(_get_thumb_path)<br>    def _get_thumb_url(self):<br>        return _add_thumb(self.url)<br>    thumb_url = property(_get_thumb_url)<br>    def save(self, name, content, save=True):<br>        super(ThumbnailImageFieldFile, self).save(name, content, save)<br>        img = Image.open(self.path)<br>        img.thumbnail(<br>            (self.field.thumb_width, self.field.thumb_height),<br>            Image.ANTIALIAS<br>        )<br>        img.save(self.thumb_path, “JPEG”)<br>    def delete(self, save=True):<br>        if os.path.exists(self.thumb_path):<br>            os.remove(self.thumb_path)<br>        super(ThumbnailImageFieldFile, self).delete(save)  # 删除原图<br>class ThumbnailImageFiled(ImageField):<br>    attr_class = ThumbnailImageFieldFile<br>    def <strong>init</strong>(self, thumb_width=400, thumb_height=320, <em>args, **kwargs):<br>        self.thumb_width = thumb_width<br>        self.thumb_height = thumb_height<br>        super(ThumbnailImageFiled, self).<strong>init</strong>(</em>args, **kwargs)</p>
+<h3 id="views-py"><a href="#views-py" class="headerlink" title="views.py"></a>views.py</h3><h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="coding:utf-8"></a>coding:utf-8</h1><p>from django.shortcuts import render, render_to_response<br>from django.views.generic import ListView, DetailView<br>from .models import Item, Photo</p>
+<p>def index(request):<br>    return render_to_response(“gallery/index.html”)</p>
+<p>class ItemList(ListView):<br>    model = Item  # 默认取Item中全部数据<br>    context_object_name = ‘item_list’  # 模板中使用的变量<br>    template_name = ‘gallery/items_list.html’</p>
+<pre><code>def get_context_data(self, **kwargs):  # 必须要有，不然无返回数据，可以在模型基础上新增返回数据
+    item_list = super(ItemList, self).get_context_data(**kwargs)
+    return item_list
+</code></pre><p>class ItemDetail(DetailView):<br>    model = Item<br>    context_object_name = ‘item’<br>    template_name = ‘gallery/items_detail.html’<br>    pk_url_kwarg = ‘object_id’  # 必须添加</p>
+<pre><code>def get_context_data(self, **kwargs):  # 必须要有，不然无返回数据，可以在模型基础上新增返回数据
+    item_detail = super(ItemDetail, self).get_context_data(**kwargs)
+    return item_detail
+</code></pre><p>class PhotosDetail(DetailView):<br>    model = Photo<br>    context_object_name = ‘photo’<br>    template_name = ‘gallery/photos_detail.html’<br>    pk_url_kwarg = ‘object_id’</p>
+<pre><code>def get_context_data(self, **kwargs):  # 必须要有，不然无返回数据，可以在模型基础上新增返回数据
+    photos_detail = super(PhotosDetail, self).get_context_data(**kwargs)
+    return photos_detail
+</code></pre><h3 id="models-py"><a href="#models-py" class="headerlink" title="models.py"></a>models.py</h3><p>from django.db import models<br>from django.db.models import permalink<br>from gallery.fields import ThumbnailImageFiled</p>
+<p>class Item(models.Model):<br>    name = models.CharField(max_length=250)<br>    description = models.TextField()</p>
+<pre><code>class Meta:
+    ordering = [&apos;name&apos;]
+
+def __unicode__(self):
+    return self.name
+
+@models.permalink
+def get_absolute_url(self):
+    return &apos;item_detail&apos;, None, &amp;#123;&apos;object_id&apos;: self.id&amp;#125;
+</code></pre><p>class Photo(models.Model):<br>    item = models.ForeignKey(Item)<br>    title = models.CharField(max_length=100)</p>
+<pre><code># image = models.ImageField(upload_to=&apos;photos&apos;)
+image = ThumbnailImageFiled(upload_to=&apos;photos&apos;)
+caption = models.CharField(max_length=250, blank=True)
+
+class Meta:
+    ordering = [&apos;title&apos;]
+
+def __unicode__(self):
+    return self.title
+
+@permalink
+def get_absolute_url(self):
+    return &apos;photo_detail&apos;, None, &amp;#123;&apos;object_id&apos;: self.id&amp;#125;
+</code></pre><h3 id="admin-py"><a href="#admin-py" class="headerlink" title="admin.py"></a>admin.py</h3><p>from django.contrib import admin<br>from models import Photo, Item</p>
+<p>class PhotoInline(admin.TabularInline):  # admin.StackedInline<br>    model = Photo</p>
+<p>class ItemAdmin(admin.ModelAdmin):<br>    inlines = [PhotoInline]</p>
+<p>admin.site.register(Item, ItemAdmin)<br>admin.site.register(Photo)</p>
+<h2 id="app-templates-app"><a href="#app-templates-app" class="headerlink" title="app/templates/app/"></a>app/templates/app/</h2><h3 id="base-html"><a href="#base-html" class="headerlink" title="base.html"></a>base.html</h3><p>&lt;!DOCTYPE html&gt;</p>
+<p><html lang="en"></html></p>
+<p><head><br>    <meta charset="UTF-8"><br>    <title>&#123;% block title %&#125;&#123;% endblock %&#125;</title><br>    &#123;% load static %&#125;<br>    <link rel="stylesheet" type="text/css" href="&#123;% static 'gallery/css/bootstrap.min.css' %&#125;"><br></head></p>
+<p><body><br>&#123;% block header %&#125;<br>    <div class="container-fluid"><br>        <nav class="navbar navbar-default bg-primary navbar-static-top"><br>            <div class="navbar-header"><br>                <div class="navbar-brand">Gallery</div><br>            </div><br>            <ul class="nav navbar-nav nav-pills"><br>                <li><a href="&#123;% url 'index' %&#125;">Home</a></li><br>                <li><a href="&#123;% url 'index' %&#125;">Gallery</a></li><br>                <li><a href="#">Blog</a></li><br>            </ul><br>            <form class="navbar-form navbar-right" style="margin-right: 10px;"><br>                <div class="form-group"><br>                    <a type="button" class="btn btn-primary" href="admin/">Login</a><br>                </div><br>            </form><br>        </nav><br>    </div><br>&#123;% endblock %&#125;</body></p>
+<p><div class="container-fluid"><br>    &#123;% block content %&#125;&#123;% endblock %&#125;<br></div><br>&#123;% block footer %&#125;<br>    <div class="container-fluid"><br>        <div class="navbar"><br>            <ul class="nav navbar-nav nav-pills"><br>                <li><a href="&#123;% url 'index' %&#125;">Home</a></li><br>                <li><a href="&#123;% url 'index' %&#125;">Gallery</a></li><br>                <li><a href="#">Blog</a></li><br>            </ul><br>        </div><br>    </div><br>    <script src="&#123;% static 'gallery/js/jquery.min.js' %&#125;"></script><br>    <script src="&#123;% static 'gallery/js/bootstrap.min.js' %&#125;"></script><br>&#123;% endblock %&#125;<br><br></p>
+<h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><p>&#123;% extends ‘gallery/base.html’ %&#125;<br>&#123;% block title %&#125;Home&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>    </p><h1><a href="&#123;% url 'item_list' %&#125;">ItemList</a> </h1><br>&#123;% endblock %&#125;<p></p>
+<h3 id="items-list-html"><a href="#items-list-html" class="headerlink" title="items_list.html"></a>items_list.html</h3><p>&#123;% extends ‘gallery/base.html’ %&#125;<br>&#123;% block title %&#125;Home&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>    <div class="page-header"><h1>Showcase</h1></div><br>    <div class="row"><br>        &#123;% for item in item_list|slice:”:4” %&#125;<br>            <div class="col-sm-6 col-md-3"><br>                <div class="thumbnail"><br>                    &#123;% if item.photo_set.count %&#125;<br>                        <img src="&#123;&#123; item.photo_set.all.0.image.thumb_url &#125;&#125;" alt="..."><br>                    &#123;% else %&#125;<br>                        <span>No photos (yet)</span><br>                    &#123;% endif %&#125;<br>                    <div class="caption"><br>                        <h3><a href="&#123;&#123; item.get_absolute_url &#125;&#125;">&#123;&#123; item.name &#125;&#125;</a></h3><br>                        <p>&#123;&#123; item.description &#125;&#125;</p><br>                        <p><a href="&#123;&#123; item.get_absolute_url &#125;&#125;" class="btn btn-primary">View Detail</a></p><br>                    </div><br>                </div><br>            </div><br>        &#123;% endfor %&#125;<br>    </div><br>&#123;% endblock %&#125;</p>
+<h3 id="items-detail-html"><a href="#items-detail-html" class="headerlink" title="items_detail.html"></a>items_detail.html</h3><p>&#123;% extends ‘gallery/base.html’ %&#125;<br>&#123;% block title %&#125;Home&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>    <div class="page-header"><h1>&#123;&#123; item.name &#125;&#125;</h1></div><br>    &#123;% for photo in item.photo_set.all %&#125;<br>        <div class="col-sm-6 col-md-3"><br>            <div class="thumbnail"><br>                <img src="&#123;&#123; photo.image.thumb_url &#125;&#125;" alt="..."><br>                <div class="caption"><br>                    <h3><a href="#">&#123;&#123; photo.title &#125;&#125;</a></h3><br>                    <p>&#123;&#123; photo.caption &#125;&#125;</p><br>                    <p><a href="&#123;% url 'photos_detail' photo.id %&#125;" type="button" class="btn btn-primary">Photo<br>                        Detail</a></p><br>                </div><br>            </div><br>        </div><br>    &#123;% endfor %&#125;<br>&#123;% endblock %&#125;</p>
+<h3 id="photos-detail-html"><a href="#photos-detail-html" class="headerlink" title="photos_detail.html"></a>photos_detail.html</h3><p>&#123;% extends ‘gallery/base.html’ %&#125;<br>&#123;% block title %&#125;Home&#123;% endblock %&#125;<br>&#123;% block content %&#125;<br>    <div class="page-header"><h1>&#123;&#123; photo.title &#125;&#125;</h1></div><br>    </p><h3><a href="#">&#123;&#123; photo.caption &#125;&#125;</a></h3><br>    <img src="&#123;&#123; photo.image.url &#125;&#125;" alt="..."><br>    <br>&#123;% endblock %&#125;<p></p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

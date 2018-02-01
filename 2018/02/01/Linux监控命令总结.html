@@ -1,0 +1,190 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux监控命令总结 | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Linux监控命令总结"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Linux监控命令总结</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 20:04:10</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>Linux命令</p>
+<p>Linux命令</p>
+<p>1 Linux基本命令<br>  1.1 目录操作<br>    1.1.1 ls<br>    1.1.2 cp<br>        1.1.2.1 -R<br>    1.1.3 mv<br>    1.1.4 chmod<br>  1.2 文件操作<br>    1.2.1 touch<br>    1.2.2 vim<br>    1.2.3 cat/tac/more/less<br>    1.2.4 head<br>        1.2.4.1 head -2 file 查看前两行<br>        1.2.4.2 head -c 2048 file 查看前2048kb<br>    1.2.5 tail<br>        1.2.5.1 tail -100 file 查看末尾100行<br>        1.2.5.2 tail -f /tmp/ERROR.log 事实查看文件更新<br>    1.2.6 清空文件<br>        1.2.6.1 cat /etc/null &gt; file<br>        1.2.6.2 echo /etc/null &gt;file<br>        1.2.6.3 echo “” &gt;file<br>    1.2.7 find<br>        1.2.7.1 -name 指定文件名，支持<em><br>        1.2.7.2 -user 制定所属用户<br>        1.2.7.3 find / -name cat</em>.h -user tomcat<br>  1.3 重启/关机<br>    1.3.1 shutdown<br>        1.3.1.1 -h<br>        1.3.1.2 -r<br>    1.3.2 reboot<br>  1.4 解压/安装<br>    1.4.1 tar<br>        1.4.1.1 -x 解压 tar<br>                1.4.1.1.1 tar -xvf file.tar<br>        1.4.1.2 -v 解压可视<br>        1.4.1.3 -f 文件<br>                1.4.1.3.1 必须<br>        1.4.1.4 -z 解压tar.gz<br>                1.4.1.4.1 tar -zxvf file.tar.gz<br>        1.4.1.5 -j 解压 tar.bz2<br>                1.4.1.5.1 tar -jxvf file.tar.bz2<br>        1.4.1.6 -Z 解压 tar.Z<br>                1.4.1.6.1 tar -Zxvf file.tar.Z<br>        1.4.1.7 其他<br>                1.4.1.7.1 -c建立压缩<br>                1.4.1.7.2 -t 查看内容<br>                1.4.1.7.3 -r 向压缩包追加文件<br>                1.4.1.7.4 -u 跟体系元压缩包中的文件<br>                1.4.1.7.5 - O 将文件纪要的标准输出<br>    1.4.2 unrar<br>        1.4.2.1 unrar e file.rar<br>    1.4.3 unzip<br>        1.4.3.1 unzip file.zip<br>    1.4.4 rpm<br>        1.4.4.1 -ivh<br>        1.4.4.2 -a<br>        1.4.4.3 -q<br>        1.4.4.4 -l<br>        1.4.4.5 rpm -qal | grep mysql<br>        1.4.4.6 rpm -qa | grep yum | xargs rpm -e –nodeps<br>  1.5 查看系统版本<br>    1.5.1 uname -a<br>    1.5.2 lbs_release -a<br>    1.5.3 cat /proc/version<br>2 Linux监控命令<br>  2.1 综合<br>    2.1.1 top<br>        2.1.1.1 实时监控系统状态，并可以按照cpu/mem/执行时间排序<br>        2.1.1.2 启动参数<br>                2.1.1.2.1 -b 批次运行<br>                2.1.1.2.2 -d 延迟时间<br>                2.1.1.2.3 -n 运行次数<br>                2.1.1.2.4 -u/U 监控制定用户<br>                2.1.1.2.5 -p 监控制定进程<br>                2.1.1.2.6 -H 显示线程<br>                2.1.1.2.7 -i 显示空闲的进程<br>        2.1.1.3 任务区命令<br>                2.1.1.3.1 任务排序<br>                2.1.1.3.1.1 C 按cpu使用率排序，再按一下反向排序<br>                2.1.1.3.1.1.1<br>                2.1.1.3.1.2 M 按内存使用排序<br>                2.1.1.3.1.3 T 按运行时间排序<br>                2.1.1.3.2 s<br>                2.1.1.3.2.1 更改delay<br>                2.1.1.3.3 1<br>                2.1.1.3.3.1 显示所有cpu<br>        2.1.1.4 VIRT<br>                2.1.1.4.1 程序向系统申请的内存<br>        2.1.1.5 RES<br>                2.1.1.5.1 程序实际使用内存<br>        2.1.1.6 Swap<br>                2.1.1.6.1 程序实际使用的虚拟内存<br>                2.1.1.6.2 添加Swap列<br>                2.1.1.6.2.1 按f,选中Swap按空格(先删除1列）按s,按q<br>    2.1.2 vmstat<br>        2.1.2.1 监控操作系统的进程状态、内存、虚拟内存、磁盘IO、上下文、CPU的信息<br>    2.1.3 sar<br>        2.1.3.1 全名的获取到cpu 、运行、磁盘IO、虚拟内存、内存、网络等信息<br>        2.1.3.2 sar -u 1 3<br>        2.1.3.3 -u cpu<br>        2.1.3.4 -v 进程 节点 文件 锁表<br>        2.1.3.5 -d 硬盘使用<br>        2.1.3.6 -r 内存<br>        2.1.3.7 -n 网络使用<br>        2.1.3.8 -R 进程活动<br>    2.1.4 dstat<br>        2.1.4.1 监控系统cpu,网络,磁盘,页面交换<br>                2.1.4.1.1 yum install dstat<br>                2.1.4.1.2 可以展示最好各项资源的进程，可以生成csv文件<br>        2.1.4.2 参数<br>                2.1.4.2.1 -c 总cpu状态<br>                2.1.4.2.1.1 dstat -clp 1 10<br>                2.1.4.2.1.2 -l load<br>                2.1.4.2.1.3 -p process status<br>                2.1.4.2.1.4 -C 0,1 监控指定cpu(0,1)的状态<br>                2.1.4.2.2 -m –mem 内存<br>                2.1.4.2.3 -d 磁盘<br>                2.1.4.2.3.1 dstat -d –disk-util –disk-tpk 2 10<br>                监控CPU进行I/O读写：cpu监控里面的wai增大，势必会造成，进程I/O读写频繁。Wait次数越多，某个进程的I/O就会越大。某个进程的I/O越大，I/O读写的tps就越频繁。（CPU监控）wait block i/o process 和（磁盘监控）read writ|util|reads writs指标，成正比。<br>                2.1.4.2.3.2 –disk-util 磁盘使用率<br>                2.1.4.2.3.3 –disk-tps 每秒tps read write 次数<br>                2.1.4.2.4 -n –net 网络<br>                2.1.4.2.5 –top-cpu<br>                2.1.4.2.5.1 列出最耗CPU的进程<br>                2.1.4.2.6 –top-bio<br>                2.1.4.2.6.1 列出当前CPU进程里面，I/O频繁，并且是受阻的<br>                2.1.4.2.7 –top-mem<br>                2.1.4.2.7.1 展示最耗内存的进程，耗用了多少内存<br>                2.1.4.2.8 –output file 写csv文件<br>        2.1.4.3 案例<br>                2.1.4.3.1 dstat 2 3<br>                2.1.4.3.1.1 默认 -cdngy<br>                2.1.4.3.2 dstat -almpsr –disk-utl –top_bo –top-cpu –top-men –output /root/dstat.csv 3 3600&amp;<br>                2.1.4.3.3 dstat -clpmdn –top-cpu –top-bio –top-men –disk-util –disk-tps –output /root/dstat2.csv 3 1200<br>  2.2 cpu<br>    2.2.1 uptime<br>        2.2.1.1 统计系统当前的运行状态<br>                2.2.1.1.1 查看当前CPU的load，同dstat -l<br>    2.2.2 tload<br>        2.2.2.1 查看当前CPU的load，每隔2到3s更新一次<br>    2.2.3 cat /proc/loadavg<br>    2.2.4 mpstat<br>        2.2.4.1 输出每个CPU的运行状况，为多处理器系统中的CPU利用率提供统计信息<br>  2.3 mem<br>    2.3.1 free<br>        2.3.1.1 监控系统内存<br>        2.3.1.2 -b/k/m/g/–tera 设定单位为b/Kb/M/G/T<br>        2.3.1.3 -l 显示 low/high<br>        2.3.1.4 -t 显示total<br>        2.3.1.5 -s 更新时间间隔<br>        2.3.1.6 -c 更新次数<br>        2.3.1.7 free -m -t -s 1 -c 3<br>        2.3.1.8 实际已使用物理内存=used(Mem)-buff/cache<br>        2.3.1.9 实际空闲物理内存=free(Mem)+buff/cache<br>        2.3.1.10 如果虚拟内存，使用率持续增大，有可能，真实使用的物理内存越来越小，可能不够。<br>  2.4 process<br>    2.4.1 ps<br>  2.5 disk/io<br>    2.5.1 df<br>        2.5.1.1 文件系统磁盘空间的使用报告<br>        2.5.1.2 -a 显示所有文件系统<br>    2.5.2 iostat<br>        2.5.2.1 磁盘监控<br>                2.5.2.1.1 yum -q install /usr/bin/iostat<br>        2.5.2.2 参数<br>                2.5.2.2.1 -c 只显示cpu<br>                2.5.2.2.2 -d 只显示io信息<br>                2.5.2.2.3 -t 显示时间戳<br>                2.5.2.2.4 -x 把/proc/diskstats的内容显示出来<br>                2.5.2.2.5 -k 以kb单位显示<br>                2.5.2.2.6 iostat -k -d -x 3 1<br>        2.5.2.3 字段解析<br>                2.5.2.3.1 rrqm/s<br>                2.5.2.3.1.1 每秒进行 merge 的读操作数目<br>                2.5.2.3.2 wrqm/s<br>                2.5.2.3.2.1 每秒进行 merge 的写操作数目<br>                2.5.2.3.3 r/s<br>                2.5.2.3.3.1 每秒完成的读 I/O 设备次数<br>                2.5.2.3.4 w/s<br>                2.5.2.3.4.1 每秒完成的写 I/O 设备次数<br>                2.5.2.3.5 rkB/s<br>                2.5.2.3.5.1 每秒读K字节数<br>                2.5.2.3.6 wkB/s<br>                2.5.2.3.6.1 每秒写K字节数<br>                2.5.2.3.7 avgrq-sz<br>                2.5.2.3.7.1 平均每次设备I/O操作的数据大小<br>                2.5.2.3.8 avgqu-sz<br>                2.5.2.3.8.1 平均I/O队列长度<br>                2.5.2.3.9 await<br>                2.5.2.3.9.1 平均每次设备I/O操作的等待时间 (毫秒)<br>                2.5.2.3.10 svctm<br>                2.5.2.3.10.1 平均每次设备I/O操作的服务时间 (毫秒)<br>                2.5.2.3.11 %util<br>                2.5.2.3.11.1 一秒中有百分之多少的时间用于 I/O 操作<br>        2.5.2.4 分析<br>        只要读写次数上升（r/s和w/s；rKB/s和wKB/s），会引起读写I/O的平均排队数上升（avgqu-sz），引起I/O等待（await）上升，引起磁盘读写的时候磁盘服务时间增大（svctm），当这些都增大，会引起磁盘使用率增大（%util）。如何让使用率下降，程序I/O要降低，要不然磁盘读写频繁是不会下降的。项目经验：开发的代码没问题，但频繁的往磁盘写日志，并发量越大，写磁盘的日志就越频繁，造成整体性能下降。<br>    2.5.3 iotop<br>        2.5.3.1 基础的I/O监控命令<br>                2.5.3.1.1 yum install iotop<br>        2.5.3.2 -d 采集频率<br>  2.6 network<br>    2.6.1 ifconfig<br>        2.6.1.1 分网卡看进出包的个数、字节数<br>                2.6.1.1.1 yum install net-tools<br>        2.6.1.2 RX packets 接收数据包<br>        2.6.1.3 TX packets 发送数据包<br>    2.6.2 ifstat<br>        2.6.2.1 统计网络接口活动状态<br>    2.6.3 netstat<br>        2.6.3.1 显示本机网络链接、运行端口、路由表等信息<br>十一月 21, 2017. Created by XMind</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

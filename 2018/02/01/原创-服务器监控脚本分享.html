@@ -1,0 +1,205 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原创]服务器监控脚本分享 | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="[原创]服务器监控脚本分享"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>[原创]服务器监控脚本分享</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:30:30</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding=utf-8"></a>coding=utf-8</h1><p>from email.mime.text import MIMEText<br>from email.header import Header<br>from functools import wraps<br>import smtplib<br>import psutil<br>import time<br>import json</p>
+<h1 id="邮件配置"><a href="#邮件配置" class="headerlink" title="邮件配置"></a>邮件配置</h1><p>SMTP_SERVER = ‘smtphm.qiye.163.com’<br>SMTP_USER = ‘hanzhichao@spicespirit.com’<br>SMTP_PASSWD = ‘hanzhichao123’<br>RECEIVER_LIST = [‘superhin@126.com’,’hanzhichao@spicespirit.com’]<br>EMAIL_SUBJECT = ‘服务器检查邮件报警！！！’<br>EMAIL_TPL = ‘’</p>
+<h1 id="CPU-MEMORY-报警百分比"><a href="#CPU-MEMORY-报警百分比" class="headerlink" title="CPU/MEMORY 报警百分比"></a>CPU/MEMORY 报警百分比</h1><p>CPU_WARN_PERCENT = 70<br>MEM_WARN_PERCENT = 70</p>
+<h1 id="php-fpm-单线程-报价值-M"><a href="#php-fpm-单线程-报价值-M" class="headerlink" title="php-fpm 单线程 报价值(M)"></a>php-fpm 单线程 报价值(M)</h1><p>RES_WARN = 128</p>
+<h1 id="日志文件-s会替换成日期"><a href="#日志文件-s会替换成日期" class="headerlink" title="日志文件,%s会替换成日期"></a>日志文件,%s会替换成日期</h1><p>TODAY = time.strftime(‘%Y-%m-%d’,time.localtime(time.time()))<br>LOG_FILE = ‘/var/log/health<em>check</em>%s.log’ % TODAY</p>
+<h1 id="用于显示执行时间的装饰器"><a href="#用于显示执行时间的装饰器" class="headerlink" title="用于显示执行时间的装饰器"></a>用于显示执行时间的装饰器</h1><p>def _show_time(func):<br>    @wraps(func)<br>    def wrapper(<em>args, **kwargs):<br>        print(“start %s … …” % func.<strong>name</strong>)<br>        start_time = time.time()<br>        func_result = func(</em>args, **kwargs)<br>        print(“%s 执行时间：%.3fs” % (func.<strong>name</strong>, time.time()-start_time))<br>        return func_result<br>    return wrapper</p>
+<h1 id="用于将返回列表整理成字典的装饰器"><a href="#用于将返回列表整理成字典的装饰器" class="headerlink" title="用于将返回列表整理成字典的装饰器"></a>用于将返回列表整理成字典的装饰器</h1><p>def _collect_result(func):<br>    @wraps(func)<br>    def wrapper(<em>args, **kwargs):<br>        func_result = func(</em>args, **kwargs)<br>        return {func.<strong>name</strong>: {‘status’: ‘OK’, ‘process_list’: []}} if not func_result else {func.<strong>name</strong>: {‘status’: ‘WARN’, ‘process_list’: func_result}}<br>    return wrapper<br>@_show_time<br>@_collect_result<br>def check_cpu():<br>    if psutil.cpu_percent(0.01) &gt;= int(CPU_WARN_PERCENT):<br>        return get_top_process(‘cpu’, 10, True)<br>    else:<br>        return []<br>@_show_time<br>@_collect_result<br>def check_mem():<br>    if psutil.virtual_memory().percent &gt;= int(MEM_WARN_PERCENT):<br>        return get_top_process(‘mem’, 10, True)<br>    else:<br>        return []</p>
+<h1 id="获取mem-cpu占用最高的n个进程"><a href="#获取mem-cpu占用最高的n个进程" class="headerlink" title="获取mem/cpu占用最高的n个进程"></a>获取mem/cpu占用最高的n个进程</h1><p>def get_top_process(option=’mem’,n=10,added=True):<br>    process_list = []<br>    for proc in psutil.process_iter():<br>        process_list.append((proc.name(), proc.memory_percent(), proc.cpu_percent(0.01)))<br>    process_list.sort(key=lambda process_list:process_list[0]) # 按进程名排序<br>    if added:</p>
+<pre><code>    # 累加相同进程名进程资源占用百分比
+    process_list = reduce(
+        lambda x,y: x+[y] if x==[] or x[-1][0]!=y[0] else x[0:-1]+[(x[-1][0],x[-1][1]+y[1],x[-1][2]+y[2])],
+        [[]] + process_list)
+sort_index = 1 if option.lower() == &apos;mem&apos; else 2  # 排序列,option=mem,按prcess_list第2列(index=1)排序
+# 将process_list按相应列从大到小排序,无累加-------# todo 先累加再排序
+process_list.sort(key=lambda process_list:process_list[2 if sort_index==1 else 1], reverse=True)
+process_list.sort(key=lambda process_list:process_list[sort_index], reverse=True)
+return process_list[0:n]
+</code></pre><p>@_show_time<br>@_collect_result<br>def check_zombie_process():<br>    zombie_process_list = []<br>    for proc in psutil.process_iter():<br>        if proc.status() == ‘zombie’:<br>            zombie_process_list.append(<br>                (proc.name(), proc.status(), proc.create_time(), proc.memory_percent(), proc.cpu_percent(0.01))<br>                )<br>    return zombie_process_list<br>@_show_time<br>@_collect_result<br>def check_single_process(process_name=’php-fpm’):<br>    warn_process_list = []<br>    for proc in psutil.process_iter():<br>        if proc.name() == process_name:<br>            if proc.memory_info().res()/1024/1024 &gt;= int(RES_WARN):<br>                warn_process_list.append(proc.name(), proc.create_time(), proc.memory_info().res(), proc.connections())<br>        return warn_process_list<br>@_show_time<br>def write_log(check_result):<br>    now= time.strftime(‘%Y-%m-%d %H:%M:%S’,time.localtime(time.time()))<br>    try:<br>        with open(LOG_FILE,’ab’) as f:<br>            f.writelines(now + ‘\t’ + check_result)<br>    except IOError:<br>        print(“写日志文件失败！”)<br>@_show_time<br>def send_mail(subject=EMAIL_SUBJECT, content=EMAIL_TPL):<br>    mail_body = content<br>    msg = MIMEText(mail_body, ‘html’, ‘utf-8’)<br>    msg[‘Subject’] = Header(subject, ‘utf-8’)<br>    msg[‘From’] = SMTP_USER<br>    msg[‘To’] = ‘,’.join(RECEIVER_LIST)<br>    smtp = smtplib.SMTP_SSL()<br>    smtp.connect(SMTP_SERVER,994)<br>    smtp.login(SMTP_USER, SMTP_PASSWD)<br>    for reserver in RECEIVER_LIST:<br>        smtp.sendmail(SMTP_USER, reserver, msg.as_string())<br>    smtp.quit()<br>    print(‘Email has send out!’)<br>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    print(“主程序开始”)<br>    start_time = time.time()<br>    check_result = reduce(<br>        lambda x,y: dict(x, **y),<br>        [check_cpu(), check_mem(), check_zombie_process(), check_single_process()]<br>        )<br>    for func, func_result in check_result.items():<br>        if func_result[‘status’] != ‘OK’:<br>            send_mail(func + ‘报警’,json.dumps(func_result))<br>            break<br>    write_log(json.dumps(check_result))<br>    print(“总程序执行时间：%.3fs” % (time.time()-start_time))</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

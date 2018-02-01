@@ -1,0 +1,202 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flask+Wrk+Nmon+pyNmonAnalyzer开发性能测试平台 | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Flask+Wrk+Nmon+pyNmonAnalyzer开发性能测试平台"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Flask+Wrk+Nmon+pyNmonAnalyzer开发性能测试平台</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:41:21</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="perf-py"><a href="#perf-py" class="headerlink" title="perf.py"></a>perf.py</h1><h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding:utf-8"></a>coding:utf-8</h1><p>from flask import Flask, render_template, request, redirect, url_for<br>import subprocess<br>from time import sleep<br>app = Flask(<strong>name</strong>)<br>@ app.route(“/“)<br>def index():<br>    return render_template(‘index.html’)<br>@ app.route(“/wrk”, methods=[“GET”, “POST”])<br>def perf():<br>    global result<br>    result = ‘’<br>    if request.method == “POST”:<br>        method = request.form[“methods”]<br>        connection = request.form[“connection”]<br>        url = request.form[“url”]<br>        c = request.form[“c”]<br>        t = request.form[“t”]<br>        d = request.form[“d”]<br>        subprocess.Popen(“nmon -s 1 -c %s -F report.nmon” % str(int(d)+2),shell=True, stdout=subprocess.PIPE)<br>        subprocess.Popen(“wrk -c %s -t %s -d %s -H ‘%s’–latency %s://%s &gt; wrk.log” % (c, t, d, connection, method, url),<br>                         shell=True, stdout=subprocess.PIPE)<br>        sleep(int(d)+2)<br>    with open(“wrk.log”,’r’) as f:<br>        result = f.read().replace(‘\n’,’<br>‘)<br>    subprocess.Popen(“pyNmonAnalyzer -b -t static -x -o static/report -i report.nmon”, shell=True,stdout=subprocess.PIPE)</p>
+<pre><code>return render_template(&quot;wrk.html&quot;, result=result)
+</code></pre><p>@ app.route(“/nmon”)<br>def nmon():<br>    return render_template(“nmon.html”)<br>@ app.route(“/report”)<br>def report():<br>    return render_template(“report.html”)<br>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    app.run(“0.0.0.0”)</p>
+<h1 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h1><p>&lt;!DOCTYPE html&gt;</p>
+<html lang="en"><br><head><br>    <meta charset="UTF-8"><br>    <title>Performance Test</title><br>    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"><br></head><br><body><br><div class="container"><br>    <nav class="navbar navbar-default"><br>        <div class="navbar-heading"><br>            <div class="navbar-brand"><a href="#">PerfTestFlat</a></div><br>        </div><br>        <ul class="nav navbar-nav"><br>            <li class="active"><a href="./">Home</a></li><br>            <li><a href="./wrk">Wrk</a></li><br>            <li><a href="./nmon">Nmon</a></li><br>            <li><a href="./report">Report</a></li><br>        </ul><br>    </nav><br>    <div class="page-header"><h1>Welcome</h1></div><br>    </div><br><br></body><br></html>
+
+<p>#nmon.html<br>&lt;!DOCTYPE html&gt;</p>
+<html lang="en"><br><head><br>    <meta charset="UTF-8"><br>    <title>Nmon</title><br>    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"><br></head><br><body><br><div class="container"><br>    <nav class="navbar navbar-default"><br>        <div class="navbar-heading"><br>            <div class="navbar-brand"><a href="#">PerfTestFlat</a></div><br>        </div><br>        <ul class="nav navbar-nav"><br>            <li><a href="./">Home</a></li><br>            <li><a href="./wrk">Wrk</a></li><br>            <li class="active"><a href="./Nmon">Nmon</a></li><br>            <li><a href="./report">Report</a></li><br>        </ul><br>    </nav><br></div><br></body><br></html>
+
+<h1 id="report-html"><a href="#report-html" class="headerlink" title="report.html"></a>report.html</h1><p>&lt;!DOCTYPE html&gt;</p>
+<html lang="en"><br><head><br>    <meta charset="UTF-8"><br>    <title>Report</title><br>    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"><br></head><br><body><br><div class="container"><br>    <nav class="navbar navbar-default"><br>        <div class="navbar-heading"><br>            <div class="navbar-brand"><a href="#">PerfTestFlat</a></div><br>        </div><br>        <ul class="nav navbar-nav"><br>            <li><a href="./">Home</a></li><br>            <li><a href="./wrk">Wrk</a></li><br>            <li><a href="./nmon">Nmon</a></li><br>            <li class="active"><a href="./report">Report</a></li><br>        </ul><br>    </nav><br>    <div class="page-header"><h1>Report</h1></div><br>    <div class="panel"><img src="&#123;&#123; url_for('static', filename='report/img/CPU_vs_Time.png') &#125;&#125;"></div><br>    <div class="panel"><img src="&#123;&#123; url_for('static', filename='report/img/Disk_Busy_vs_Time.png') &#125;&#125;"></div><br>    <div class="panel"><img src="&#123;&#123; url_for('static', filename='report/img/Memory_vs_Time.png') &#125;&#125;"></div><br></div><br></body><br></html>
+
+<p>#result.html<br>&lt;!DOCTYPE html&gt;</p>
+<html lang="en"><br><head><br>    <meta charset="UTF-8"><br>    <title>Result</title><br>    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"><br></head><br><body><br><div class="container"><br>    <nav class="navbar navbar-default"><br>        <div class="navbar-heading"><br>            <div class="navbar-brand"><a href="#">PerfTestFlat</a></div><br>        </div><br>        <ul class="nav navbar-nav"><br>            <li class="active"><a href="#">Home</a></li><br>            <li><a href="#">Test</a></li><br>            <li><a href="#">Report</a></li><br>            <li><a href="#">Nmon</a></li><br>        </ul><br>    </nav><br>    <div class="page-header"><h1>Result</h1></div><br></div><br></body><br></html><br>#wrk.html<br>&lt;!DOCTYPE html&gt;<br><html lang="en"><br><head><br>    <meta charset="UTF-8"><br>    <title>Performance Test</title><br>    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"><br></head><br><body><br><div class="container"><br>    <nav class="navbar navbar-default"><br>        <div class="navbar-heading"><br>            <div class="navbar-brand"><a href="#">PerfTestFlat</a></div><br>        </div><br>        <ul class="nav navbar-nav"><br>            <li><a href="./">Home</a></li><br>            <li class="active"><a href="./wrk">Wrk</a></li><br>            <li><a href="./nmon">Nmon</a></li><br>            <li><a href="./report">Report</a></li><br>        </ul><br>    </nav><br>    <div class="page-header"><h1>Performance Test</h1></div><br>    <div class="col-md-4 col-sm-6" style="padding-left: 0px;"><br>        <div class="panel panel-primary"><br>            <div class="panel-heading"><br>                <div class="panel-title">Wrk</div><br>            </div><br>            <div class="panel-body"><br>                <form class="form" action="" method="post"><br>                    <div class="form-group"><br>                        <label>Method:</label><br>                        <select name="methods" class="form-control"><br>                            <option label="http" value="http">http</option><br>                            <option label="https" value="https">https</option><br>                        </select></div><br>                    <div class="form-group"><br>                        <label>Connection:</label><br>                        <select name="connection" class="form-control"><br>                            <option value="keep-alive">keep-alive</option><br>                            <option value="close">close</option><br>                        </select><br>                    </div><br>                    <div class="form-group"><br>                        <div class="input-group"><br>                            <span class="input-group-addon">Url:</span><br>                            <input type="text" class="form-control" name="url"><br>                        </div><br>                    </div><br>                    <div class="form-group"><br>                        <div class="input-group"><br>                            <span class="input-group-addon">C:</span><br>                            <input type="text" class="form-control" name="c"><br>                        </div><br>                    </div><br>                    <div class="form-group"><br>                        <div class="input-group"><br>                            <span class="input-group-addon">T:</span><br>                            <input type="text" class="form-control" name="t"><br>                        </div><br>                    </div><br>                    <div class="form-group"><br>                        <div class="input-group"><br>                            <span class="input-group-addon">D:</span><br>                            <input type="text" class="form-control" name="d"><br>                        </div><br>                    </div><br>                    <div class="form-group"><br>                        <button type="submit" class="btn btn-primary">submit</button><br>                    </div><br>                </form><br>            </div><br>            <div class="panel-footer">by Hanzhichao</div><br>        </div><br>    </div><br>    <div class="col-md-8 col-sm-6" style="padding-right: 0px"><br>        <div class="panel panel-primary"><br>            <div class="panel-heading"><div class="panel-title">Wrk Result</div></div><br>            <div class="panel-body">&#123;&#123; result|safe  &#125;&#125;</div><br>            <div class="panel-footer">by Hanzhichao</div><br>        </div><br>    </div><br></div><br></body><br></html>
+
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

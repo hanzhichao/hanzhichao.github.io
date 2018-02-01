@@ -1,0 +1,216 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django开发LiveBlog | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Django开发LiveBlog"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Django开发LiveBlog</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:47:25</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>Django 1.8.3</p>
+<p>##项目级</p>
+<p>###settings.py<br>STATICFILES_DIRS = (<br>    os.path.join(BASE_DIR, “static”),<br>)</p>
+<h3 id="urls-py"><a href="#urls-py" class="headerlink" title="urls.py"></a>urls.py</h3><p>from django.conf.urls import include, url<br>from django.contrib import admin</p>
+<p>from liveupdate.views import *</p>
+<p>urlpatterns = [<br>    url(r’^admin/‘, include(admin.site.urls)),<br>    url(r’^$’, ObjectList.as_view()),<br>    url(r’^update-after/(?P<id>\d+)/$’, update_after)<br>]</id></p>
+<p>##App级</p>
+<h3 id="models-py"><a href="#models-py" class="headerlink" title="models.py"></a>models.py</h3><p>from django.db import models</p>
+<p>class Update(models.Model):<br>    timestamp = models.DateTimeField(auto_now_add=True)<br>    text = models.TextField()</p>
+<pre><code>class Meta:
+    ordering = [&apos;-id&apos;]
+
+def __unicode__(self):
+    return &quot;[%s] %s&quot; % (
+        self.timestamp.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;),
+        self.text
+    )
+</code></pre><h3 id="admin-py"><a href="#admin-py" class="headerlink" title="admin.py"></a>admin.py</h3><p>from django.contrib import admin<br>from .models import Update</p>
+<p>admin.site.register(Update)</p>
+<h3 id="views-py"><a href="#views-py" class="headerlink" title="views.py"></a>views.py</h3><h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>from django.http import HttpResponse<br>from django.core import serializers<br>from django.views.generic import ListView</p>
+<p>from liveupdate.models import Update<br>from django.shortcuts import render</p>
+<p>object_list = Update.objects.all()</p>
+<p>class ObjectList(ListView):<br>    model = Update<br>    template_name = ‘liveupdate/update_list.html’<br>    context_object_name = ‘object_list’</p>
+<pre><code>def get_context_data(self, **kwargs):
+    item_list = super(ObjectList, self).get_context_data(**kwargs)
+    return item_list
+</code></pre><p>def update_after(request, id):<br>    response = HttpResponse()<br>    response[‘Content-Type’] = “text/javascript”<br>    response.write(serializers.serialize(“json”,<br>                                         Update.objects.filter(pk__gt=id)))<br>    return response</p>
+<h2 id="App-Templates-App"><a href="#App-Templates-App" class="headerlink" title="App/Templates/App/"></a>App/Templates/App/</h2><h3 id="update-list-html"><a href="#update-list-html" class="headerlink" title="update_list.html"></a>update_list.html</h3><p>&lt;!DOCTYPE HTML&gt;</p>
+<html><br><head><br>    &#123;% load staticfiles %&#125;<br>    <title>Live Update</title><br>    <style type="text/css"><br>        body &#123;<br>            margin: 30px;<br>            font-family: Arial;<br>            background: #fff;<br>        &#125;<br>        h1 &#123; background: #ccf; padding:20px; &#125;<br>        div.update &#123; width:100%; padding: 5px; &#125;<br>            div.even &#123; background: #ddd; &#125;<br>        div.timestamp &#123; float: left; font-weight: bold; &#125;<br>        div.text &#123; float: left; padding-left: 10px; &#125;<br>        div.clear &#123; clear: both; height: 1px; &#125;<br>    </style><br></head><br><body><br>    <h1>Welcome to the Live Update!</h1><br>    <p>This site will automatically refresh itself every minute with new content -<br>    Please <b>do not</b> reload the page!</p><br>    &#123;% if not objects_list %&#125;<br>        <div id="update-holder"><br>            &#123;% for object in object_list %&#125;<br>            <div class="update &#123;% cycle even,odd %&#125;" id="&#123;&#123; object.id &#125;&#125;"><br>                <div class="timestamp"><br>                    &#123;&#123; object.timestamp|date:”Y-m-d H:i:s”&#125;&#125;<br>                </div><br>                <div class="text"><br>                    &#123;&#123; object.text | linebreaksbr &#125;&#125;<br>                </div><br>                <br><br>                <div class="clear"></div><br>            </div><br>            &#123;% endfor %&#125;<br>        </div><br>    &#123;% else %&#125;<br>        <p>No updates yet - please check back later!</p><br>    &#123;% endif %&#125;<br>    <script type="text/javascript" language="JavaScript" src="&#123;% static 'js/jquery.min.js' %&#125;"></script><br>    <script type="text/javascript" language="JavaScript"><br>        function update()&#123;<br>            update_holder = $(“#update-holder”);<br>            most_recent = update_holder.find(“div:first”);<br>            $.getJSON(“/update-after/“ + most_recent.attr(‘id’) + “/“,<br>                function(data)&#123;<br>                    cycle_class = most_recent.hasClass(“odd”)<br>                        ? “even” :　“odd”;<br>                    jQuery.each(data,function()&#123;<br>                        update_holder.prepend(‘&lt;div id=”‘ + this.pk<br>                            + ‘“ class=”update”‘ + cycle_class<br>                            + ‘“&gt;<div class="timestamp">‘<br>                            + this.fields.timestamp<br>                            + ‘</div><div class="text">‘<br>                            + this.fields.text<br>                            + ‘</div><div class="clear"></div></div>‘<br>                        );<br>                        cycle_class = (cycle_class == “odd”)<br>                            ? “even” : “odd”;<br>                    &#125;);<br>                &#125;<br>            );<br>        &#125;<br>        $(document).ready(function()&#123;<br>            setInterval(“update()”,1000)<br>        &#125;)<br>    </script><br></body><br></html>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | 韩志超</title>
+  <title>性能测试学习笔记 | 韩志超</title>
   <meta name="author" content="Han Zhichao">
   
   <meta name="description" content="测试开发">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="性能测试学习笔记"/>
   <meta property="og:site_name" content="韩志超"/>
 
   
@@ -114,31 +114,123 @@
 	  <div class="container" >
 	    <div class="row">
 	
-	<div class="col-md-9 center-content">
+	<div class="col-md-9">
 	
 
 		<div class="content">
 			<!-- index -->
 		   
-			  	<h2>归档</h2>
-		  		
-	              <p class="archive-item">
-						<a href="../../2017/12/21/ui-checker,UI自动化测试框架分享.html" class="archive-title">uc-checker,UI自动化测试框架分享</a><span class="archive post-time">2017-12-21</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/JVM工作原理.html" class="archive-title">JVM工作原理</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/Tomcat分析调优.html" class="archive-title">tomcat</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-	              <p class="archive-item">
-						<a href="../../2017/11/02/OSI 7层网络模型.html" class="archive-title">osi</a><span class="archive post-time">2017-11-02</span>
-					</p>
-			  	
-			  <!-- post -->
+
+			  		<h2>性能测试学习笔记</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:54:37</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>课程大纲<br>第一天：<br>            1.性能测试脚本设计及编写实战<br>            2.脚本优化技术（检查点、事务、关联、参数化的设置）<br>            3.如何进行合理的性能测试场景分析及设计<br>            4.性能测试图表监控以及调优分析</p>
+<p>第二天：</p>
+<pre><code>1.数据库存储引擎及索引
+2.数据库索引优化分析
+3.数据库表结构设计优化
+4.数据库锁问题优化分析
+5.数据库常用的SQL命令优化分析
+</code></pre><p>Top命令<br>Load Average 5分钟 10分钟 15分钟<br>Load average / CPU个数 &gt;5 表示负载很大<br>并发量2000(单位 s)<br>事务平均响应时间0.05s<br>1s/0.05=1个用户200并发<br>10个用户就能达到</p>
+<p>轻负载区  重负载区 崩溃区<br>最佳用户数  最大用户数<br>LoadRunner使用(结合Fiddler抓包)</p>
+<p>基本函数</p>
+<pre><code>* web_url      模拟浏览起发出get请求
+* web_submit_data();     发送Post请求
+* web_custom_request();      模拟浏览器发出http支持的任何方式的请求
+</code></pre><p>关联</p>
+<pre><code>* web_reg_save_param     从request中获取session(参数),根据左右边界进行定位-----reg函数要在请求的函数之前,中间不能插入其他函数
+* lr_save_string(lr_paramarr_idx(&quot;fight&quot;,2),nn);获取web_reg_save_param参数数组中的某个值(获取时选择all)
+</code></pre><p>参数化<br>选中,右键,replace with a parameter<br>(用户,密码的参数使用不同的参数名,使用同一参数文件)</p>
+<p>事务<br>人为定义的一系列请求<br>LoadRunner 事务开始标记,事务结束标记,用处理事务的相应时间来衡量性能<br>结束事务名,要与开始事务名一致<br>可是使用for循环,执行多次<br>注意:事务一般只包含请求操作,检查点,关联,思考时间一般写在事务外</p>
+<p>检查点<br>放在事务开始标记前,检查相应数据,带html标签的内容(不是页面内容)<br>注意:web_reg_find检查点不支持中文内容</p>
+<p>web_find和web_reg_find的区别<br>web_find是在返回页面中查找,web_reg_find是在响应结果中查找(需要加上html标签)<br>web_find 必须 Enable image and text check</p>
+<p>思考时间<br>更加真实的模拟用户的操作<br>lr_think_time(秒数)<br>一般不放在事务里,获取真实性能指标时加入,压力测试时不加入</p>
+<p>集合点<br>实际用处不大</p>
+<p>Action()<br>{<br>    //变量声明必须写在开头<br>    int httpretcode;</p>
+<pre><code>//关联,获取session
+web_reg_save_param(&quot;session&quot;,
+    &quot;LB=name=userSession value=&quot;,
+    &quot;RB=&gt;&quot;,
+    &quot;Ord=1&quot;,
+    LAST);
+
+
+//打开网站   
+web_custom_request(&quot;web_custom_request&quot;,
+    &quot;URL=http://172.31.6.169:1080/WebTours/&quot;,
+    &quot;Method=GET&quot;,
+    &quot;TargetFrame=&quot;,
+    &quot;Resource=0&quot;,
+    &quot;Referer=&quot;,
+    &quot;Mode=HTML&quot;,
+    &quot;Body=&quot;,
+    LAST);
+
+
+//设立检查点
+
+web_reg_find(&quot;Search=All&quot;,
+    &quot;SaveCount=num&quot;,
+    &quot;Text=Welcome, &lt;b&gt;{user}&lt;/b&gt;, &quot;,
+    LAST);
+
+//事务开始点
+lr_start_transaction(&quot;登录事务&quot;);
+
+//登录
+web_submit_data(&quot;web_submit_data&quot;,
+    &quot;Action=http://172.31.6.169:1080/WebTours/login.pl&quot;,
+    &quot;Method=POST&quot;,
+    &quot;TargetFrame=&quot;,
+    &quot;Referer=&quot;,
+    &quot;Mode=HTML&quot;,
+    ITEMDATA,
+    &quot;Name=userSession&quot;, &quot;Value={session}&quot;, ENDITEM,
+    &quot;Name=username&quot;, &quot;Value={user}&quot;, ENDITEM,
+    &quot;Name=password&quot;, &quot;Value={pwd}&quot;, ENDITEM,
+    &quot;Name=login.x&quot;, &quot;Value=56&quot;, ENDITEM,
+    &quot;Name=login.y&quot;, &quot;Value=10&quot;, ENDITEM,
+    &quot;Name=JSFormSubmit&quot;, &quot;Value=off&quot;, ENDITEM,
+    LAST);
+
+//输出读取的数据
+lr_output_message(&quot;读取到的用户名为:%s&quot;,lr_eval_string(&quot;{user}&quot;));
+lr_output_message(&quot;读取到的密码为:%s&quot;,lr_eval_string(&quot;{pwd}&quot;));
+
+//事务结束点 ,自动结束,不推荐
+//lr_end_transaction(&quot;登录事务&quot;, LR_AUTO);
+
+//自动结束事务的实现
+/*
+httpretcode=web_get_int_property(HTTP_INFO_RETURN_CODE);
+if(httpretcode==200){
+    lr_end_transaction(&quot;登录事务&quot;, LR_PASS);
+}
+else{
+    lr_end_transaction(&quot;登录事务&quot;, LR_PASS);
+}
+*/
+
+//断言
+if(atoi(lr_eval_string(&quot;{num}&quot;))&gt;0){
+    lr_end_transaction(&quot;登录事务&quot;,LR_PASS);
+}
+else{
+    lr_end_transaction(&quot;登录事务&quot;,LR_FAIL);
+}
+
+
+return 0;
+</code></pre><p>}</p>
+
+					</div>
+
+			  <!-- about -->
 			  
 		</div>
 
@@ -147,10 +239,16 @@
 
 		<div class="comment-section">
   
+  
+
 
 </div>
 	</div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
 	
 
 </div>

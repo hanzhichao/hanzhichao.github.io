@@ -1,0 +1,257 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ActiveMQ学习笔记 | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ActiveMQ学习笔记"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>ActiveMQ学习笔记</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 20:06:02</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>目录</p>
+<pre><code>1. [X] JMS规范
+2. [X] ActiveMQ初步
+3. [X] ActiveMQAPI讲解
+4. [ ] ActiveMQ高级主题（点对点模式/发布订阅模式）
+5. [ ] 多线程+ActiveMQ负载均衡器实战
+</code></pre><p>背景&amp; JMS概述<br>当前CORBA，DCOM, RMI等RPC中间件技术已广泛应用与各个领域。但是面对规模和复杂都都越来约高的分布式系统，这些技术也显示出其局限性。</p>
+<pre><code>1. 同步通信： 客户端发出调用后，必须等待服务对象完成处理并返回结果后才能继续执行；
+2. 客户和服务对象的声明周期紧密耦合： 客户进程和服务对象进程都必须正常运行；如果由于服务对象崩溃或者网络故障导致客户的请求不可达，客户还会接收到异常；
+3. 点对点通信：客户的一次调用只发给某个单独的目标对象。
+</code></pre><p>面向消息的中间件（Message Oriented Middleware, MOM)较好的解决了以上问题。发送者将消息发给消息服务器，消息服务器将消息存放在若干队列中，在合适的时候再将消息发给接收者。这种模式下，方法送和接收是异步的，发送者无需等待；二者的声明周期未必相同：发送消息的时候接收者不一定运行，接收消息的时候发送者也不一定运行；一对多通信：对于一个消息可以有多个接收者。</p>
+<p>Java消息服务：JMS定义了Java中范围消息中间件的接口。JMS只是接口，并没有给予实现，实现JMS接口的消息中间件成为JMS Provider, 已有的MOM系统包括Apache的ActiveMQ，以及阿里巴巴的RocketMQ，IBM的MQSeries，Microsoft的MSMQ，BEA的MesssageQ, RabbitMQ等待，他们基本都遵循JMS规范</p>
+<p>JMS术语<br>JMS   实现JMS接口的消息中间件</p>
+<pre><code>* Provider(MessageProducer)：生产者 -- 由会话创建的对象，用于发送消息到目标，用户可以创建某个目标的发送者，也可以创建一个通用的发送者，再发送消息时制定目标。
+* Consumer(MessageConsumer): 消费者 -- 由会话创建的对象，用于接收发送到目标的消息。消费者可以同步地（阻塞模式），或异步（非阻塞）接收队列和主题类型的消息。
+* Message  接口（消息） -- 是再消费者和生产者之间传送的对象，也就是说从一个应用程序传送到另一个应用程序，一个消息有三个主要部分：
+
+    * 消息头（必须）： 包含黄永玉识别和为消息寻找路由的操作设置
+    * 一组消息数学（可选）： 包含额外的属性， 支持其他提供者和用户的兼容。可以创建定制的字段和顾虑器（消息选择器）。
+    * 一个消息体（可选）： 允许用户创建五种类型的消息（文本消息，映射消息，字节消息，流消息和对象消息）
+    * 消息接口非常灵活，并提供了许多方式来定制消息的内容。
+* PTP: Point to Point， 点对点的消息模型
+* Pub/Sub: Publish/Subscribe:  发布/订阅模式
+* Queue: 队列目标
+* Topic: 主题目标
+* ConnectionFactory: 连接工厂， JMS用它创建连接：
+* Connection: JMS客户端到JMS Provider的连接
+* Destination: 消息的目的地
+* Session: 会话， 一个发送或接收请求的线程
+</code></pre><p>消息格式定义<br>JMS定义了五种不同的消息正文格式， 以及调用的消息类型，允许你发送并接收以一些不同形式的数据， 提供现有消息格式化的一些级别的兼容性。</p>
+<pre><code>* StreemMessage    Java 原始值的数据流
+* MapMessage    名称-值 对
+* TestMessage   字符串对象
+* ObjectMessage 一个序列化的Java对象
+* BytesMessage 一个未解释字节的数据流
+</code></pre><p>ActiveMQ简介<br>ActiveMQ是Apache出品，最流行的，能力强劲的开源消息总线。<br>ActiveMQ是一个完全支持JMS1.1混合J2EE 1.4规范的JMS Provider实现， 尽管JMS规范初代已经是很久的事情了，但是JMS在当今的J2EE应用中仍然扮演着特殊的地位， 可以说ActiveMQ在业界应用最广泛， 当然如果想要用更强大的性能和海量数据处理能力， ActiveMQ还需要不断的升级版本， 80%以上的业务我们使用ActiveMQ已经足够满足需求，当然后续如天猫、淘宝这种大型的电商网站，尤其是双11这种特殊时间，ActiveMQ需要进行很复杂的优化原名以及架构设计才能完成，我们之后会学习一个更强大的分布式消息中间件：RocketMQ，可以说ActiveMQ是核心，是基础，所有我们必须要掌握好。</p>
+<p>ActiveMQ Hello World<br>我们首先写一个简单的Hello World示例， 让大家感受下ActiveMQ, 我们需要实现接受者混合发送者两部分代码的编写。<br>Sender/Receiver</p>
+<pre><code>1. 建立ConnectionFactory工厂对象， 需要填入用户名、密码、以及要连接的地址，均时候用默认即可，默认端口为“tcp://localhost:61616&quot;
+2. 通过ConnectionFactory工厂我们创建一个Connection连接，并且调用Connection的start放放风开启连接，Connection默认是关闭的。
+3. 通过Connection对象创建Session会话（上下文环境对象），用于接收消息，参数配置为1为是否启用多事务， 参数配置2为签收模式，一般我们设置自动签收
+4. 通过Session创建Destination对象， 指的事一个客户端用来指定生产消息目标和消息来源的对象，在PTP模式中，Destination被称做Queue即队列，在Pub/Sub模式中，Destination被称做Topic即主题。在程序中可以使用多个Queue和Topic。
+5. 我们需要通过Session对象创建消息的发送和接收对象（生产者混合消费者）MessageProduce/MessageConsumer
+6. 我们可以使用MessageProducer的setDeliveryMode方法为其设置持久化特性和非持久化特性（DeliveryMode)
+7. 最后后我们使用JMS规范的TextMessage形式创建数据（通过Session对象）,并用MessageProducer的send放放风发送数据。同理客户段使用receive方法进行接收数据，最后不要忘记关闭Connection连接）
+</code></pre><p>ActiveMQ安全机制</p>
+<pre><code>* activemq的web管理界面：http://localhost:8161/admin
+
+    * activemq管控台时候用jetty部署，要修改admin管理密码需要修改conf/jetty_realm.properites
+* activemq应该设置在又安全几张桌子，hi有符合认证的用户才能进行发送和获取消息，所以我们也可以再activemq.xml里去添加安全验证。在conf\activemq.xml，第123行规之后添加配置：
+
+    &lt;plugins&gt;
+      &lt;simpleAuthenticationPlugin&gt;
+        &lt;users&gt;
+          &lt;authenticationUser username=&quot;hzc&quot; password=&quot;hzc&quot; groups=&quot;users,admins&quot;/&gt;
+        &lt;/users&gt;
+      &lt;/simpleAuthenticationPlugin&gt;
+    &lt;/plugins&gt;
+</code></pre><p>Connection方法使用</p>
+<p>在成功创建正确的ConnectionFactory后，下一步是创建一个连接，它是JMS定义的一个接口。ConnectionFactory负责返回可以与地层消息床底系统进行通信的Connection实现。通常客户端只使用单一连接，根据JMS文档，Connection的目的是“利用JMS提供者封装开放的连接”,以及表示“客户端与提供者服务例程之间的开发TCP/IP套接字”。该文档还指出Connection应该是进行客户端身份验证的地方等待。</p>
+<p>当一个Connection被创建时，它的传输默认是关闭的，必须用start方法开启。一个Connection可以简历一个或多个Session.</p>
+<p>当一个程序执行完成后，必须关闭之前创建的Connection, 否则ActiveMQ不能释放资源，关闭一个Connection同样也关闭了Session,MessageProducer和MessageConsumer</p>
+<p>Connection createConnection();<br>Connection createConnection(String userName, String password, String url);</p>
+<p>Session 方法使用</p>
+<p>一旦从ConnectionFactory中获得一个Connection, 必须从Connection中创建一个或者多个Session.Session是一个发送或接收消息的线程，可以使用Session创建MessageProducer,MessageConsumer和Message.</p>
+<p>Session可以被事务花，也可以不被事务化，通常，可以通过向Connection上的十点过创建方法传递一个布尔参数对此进行设置。<br>Session createSession(boolean transacted, int acknowledgeMode);<br>其中transacted为使用事务的标识，acknowledgeMode为签收模式。<br>结束事务由两种方法：提交或者回滚。当一个事务提交，消息被处理。如果事务中由一个步骤失败，事务就回滚，这个事务中的已经执行的动作将被测小。在发送消息最后也必须使用session.commit()方法提交事务。</p>
+<p>签收由三种形式：</p>
+<pre><code>* Session.AUTO_ACKNOWLEDGE 当客户端从receive或onMessage成功返回时，Session自动签收客户端的这条消息的收条。
+* Session.CLIENT_ACKNOWLEDGE客户端通过调用消息（Message)的acknowledge方法签收消息。在这种情况下，签收发生在Session层面：签收一个以消费的消息会自动地签收这个Session所有已消费消息的收条。
+* Session.DUPS_OK_ACKNOWLEDGE 此选项指示Session不必确保对传送消息的签收。它可能引起消息的重复，但是降低了Session的开心，所有只有客户端能容忍重复的消息，才可使用。
+</code></pre><p>MessageProducer<br>MessageProducer: MessageProducer是一个由Session创建的对象，用来向Destination发送消息。<br>void send(Destionation destination, Message message);<br>void send(Destination destination, Message message, int deliveryMode, int priority, long time ToLive);<br>void send(Message message);<br>void send(Message message, int deliveryMode, int priority, long time ToLive);<br>其中deliveryMode为传送模式，priority为消息优先级， timeToLive为消息过期时间。<br>ActiveMQ支持两种消息传送模式，PERSSISTENT和NON_PERSISTENT两种，如果不指定传送模式，那么默认是持久性消息。如果容忍消息丢失，那么使用非持久性消息可以改善性能和减少存储的开销。<br>消息优先级从0-9十个级别， 0-4是普通消息，5-9是加急消息。如果不指定优先级，则默认为4，JMS不要钱严格按照这10个优先级发送消息，单必须保证加急消息要先于普通消息到达。<br>默认情况下，消息用不会过期，如果消息在特定周期内失去意义，那么可以设置过期时间，单位是毫秒。</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

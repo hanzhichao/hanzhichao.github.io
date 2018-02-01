@@ -1,0 +1,537 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>简单爬虫框架分享 | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="简单爬虫框架分享"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>简单爬虫框架分享</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:28:48</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>项目结构</p>
+<p>config_load.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import os<br>import platform</p>
+<h1 id="handle-the-differences-between-python2-and-python3"><a href="#handle-the-differences-between-python2-and-python3" class="headerlink" title="handle the differences between python2 and python3"></a>handle the differences between python2 and python3</h1><p>if (platform.python_version()) &lt; ‘3’:<br>    import ConfigParser<br>    import codecs<br>else:<br>    from configparser import ConfigParser, RawConfigParser, NoOptionError, NoSectionError<br>DEFAULT_CONF = os.path.join(os.path.dirname(<strong>file</strong>), ‘conf/spider.conf’)<br>DEFAULT_SECTION = ‘spider’<br>class Config:<br>    def <strong>init</strong>(self, config_file_path=DEFAULT_CONF):<br>        try:<br>            if (platform.python_version()) &lt; ‘3’:</p>
+<pre><code>            # python 2
+            self.cf = ConfigParser.ConfigParser()
+            with codecs.open(config_file_path, encoding=&apos;utf-8-sig&apos;) as f:
+                self.cf.readfp(f)
+        else:
+            # python3
+            # self.cf = RawConfigParser()
+            # self.cf.read(config_file_path, encoding=&apos;utf8&apos;)
+            self.cf = ConfigParser()
+            self.cf.read(config_file_path)
+    except IOError:
+        raise IOError
+def get(self, option, section=DEFAULT_SECTION):
+    &quot;&quot;&quot; get option from the config file&quot;&quot;&quot;
+    return self.cf.get(section, option)
+</code></pre><p>crawl_thread.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import platform<br>import time<br>from threading import Thread, Lock<br>import webpage_parser<br>import log</p>
+<h1 id="handle-the-differences-between-python2-and-python3-1"><a href="#handle-the-differences-between-python2-and-python3-1" class="headerlink" title="handle the differences between python2 and python3"></a>handle the differences between python2 and python3</h1><p>if (platform.python_version()) &lt; ‘3’:<br>    import Queue<br>else:<br>    import queue as Queue</p>
+<h1 id="store-the-urls-which-had-been-crawled-and-saved"><a href="#store-the-urls-which-had-been-crawled-and-saved" class="headerlink" title="store the urls which had been crawled and saved"></a>store the urls which had been crawled and saved</h1><p>visited_url_list = []<br>url_queue = Queue.Queue(maxsize=-1)<br>sub_url_queue = Queue.Queue(maxsize=-1)<br>visited_url_list_lock = Lock()  # lock the visited_url_list while appending new url<br>save_page_lock = Lock()<br>def muti_crawl(thread_count, reg, crawl_interval, crawl_timeout, output_dir):<br>    “””<br>    run multiple threads to run crawl(reg, output_dir)<br>    :param thread_count: type:int thread number read from config file<br>    :param reg: regex pattern for retrieving urls<br>    :param crawl_interval: threads waiting time<br>    :param crawl_timeout: threads timeout time<br>    :param output_dir: html page output dictionary<br>    :return: None<br>    “””</p>
+<pre><code># new thread list
+threads = []
+
+# create threads
+for i in range(thread_count):
+    t = Thread(target=crawl, args=(reg, output_dir))
+    threads.append(t)
+
+# start threads
+for i in range(thread_count):
+    threads[i].setDaemon(True)
+    threads[i].start()
+    time.sleep(crawl_interval)  # waiting time
+
+# waiting all threads to complete
+for i in range(thread_count):
+    threads[i].join(crawl_timeout)
+</code></pre><p>def crawl(reg, output_dir):<br>    “””<br>    get url form the working queue, retrieve new urls and put to another queue then save the html page to output_dir<br>    :param reg: type:str retrieve url regex pattern<br>    :param output_dir: type:str read from config file<br>    :return: None<br>    “””<br>    while not url_queue.empty():</p>
+<pre><code># get one url from url_queue
+current_url = url_queue.get()
+
+# retrieve urls from current_url using reg as regex pattern
+urls = webpage_parser.retrieve_urls(current_url, reg)
+
+# save current_url as html page in output_dir
+save_page_lock.acquire()
+webpage_parser.save_page(current_url, output_dir)
+save_page_lock.release()
+
+# lock the visited_url_list while appending new url
+visited_url_list_lock.acquire()
+visited_url_list.append(current_url)
+visited_url_list_lock.release()
+
+# if current_url is valid and has urls
+if urls:
+    log.logger.debug(&quot;current url: %s&quot; % current_url)
+    for url in urls:
+        if url not in visited_url_list:
+            # put new urls to new queue if url is not visited
+            sub_url_queue.put(url)
+</code></pre><p>log.py</p>
+<h1 id="usr-bin-env-python"><a href="#usr-bin-env-python" class="headerlink" title="!/usr/bin/env python"></a>!/usr/bin/env python</h1><h1 id="coding-utf-8-2"><a href="#coding-utf-8-2" class="headerlink" title="-- coding=utf-8 --"></a>-<em>- coding=utf-8 -</em>-</h1><p>import logging<br>import time<br>import os<br>DEFAULT_LOG_FILE<em>PRX = ‘spider</em>‘<br>log_dir = os.path.join(os.path.dirname(<strong>file</strong>),’log’)</p>
+<h1 id="def-log-config-log-dir-output-log-lever-console-log-lever"><a href="#def-log-config-log-dir-output-log-lever-console-log-lever" class="headerlink" title="def log_config(log_dir, output_log_lever, console_log_lever):"></a>def log_config(log_dir, output_log_lever, console_log_lever):</h1><p>date = time.strftime(‘%Y%m%d’, time.localtime(time.time()))<br>log_file = os.path.join(log_dir, DEFAULT_LOG_FILE_PRX + date + “.log”)<br>logger = logging.getLogger(“mylogger”)<br>logger.setLevel(logging.DEBUG)<br>fh = logging.FileHandler(log_file, mode=’a’)<br>fh.setLevel(logging.DEBUG)   # output log_level<br>ch = logging.StreamHandler()<br>ch.setLevel(logging.DEBUG)   # console log_level<br>formatter = logging.Formatter(“%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s”)<br>fh.setFormatter(formatter)<br>ch.setFormatter(formatter)<br>logger.addHandler(fh)<br>logger.addHandler(ch)</p>
+<h1 id="return-logger"><a href="#return-logger" class="headerlink" title="return logger"></a>return logger</h1><p>mini_spider.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-3"><a href="#coding-utf-8-3" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import json<br>import time<br>import os<br>import log<br>import seedfile_load<br>import option_parser<br>import config_load<br>import crawl_thread<br>def main():<br>    “””<br>    main method<br>    :return: None<br>    “””</p>
+<pre><code># handle command options
+if option_parser.options.conf:
+    config = config_load.Config(option_parser.options.conf)
+else:
+    config = config_load.Config()
+
+if option_parser.options.version:
+    project_info_file = os.path.join(os.path.dirname(__file__), &quot;.project_info.json&quot;)
+    with open(project_info_file, &quot;r&quot;) as f:
+        print(json.load(f)[&apos;version&apos;])
+    exit()
+# get config options
+reg = config.get(&apos;target_url&apos;)
+max_depth = int(config.get(&apos;max_depth&apos;))
+crawl_interval = float(config.get(&apos;crawl_interval&apos;))
+crawl_timeout = float(config.get(&apos;crawl_timeout&apos;))
+
+# logging start time
+log.logger.debug(&quot;spider start at: &quot; + time.strftime(&apos;%Y-%m-%d %H:%M:%S&apos;, time.localtime(time.time())) + &quot; ---&quot;)
+start_time = time.time()
+# iterate base_urls from seed file
+for base_url in seedfile_load.get_urls(seed_file=config.get(&apos;url_list_file&apos;)):
+
+    # make dirs in output_dir for each url
+    output_dir = os.path.join(config.get(&apos;output_directory&apos;), *base_url.split(&apos;/&apos;)[2:])
+    log.logger.debug(&quot;output_dir: &quot; + output_dir)
+    if not os.path.exists(output_dir):
+        try:
+            os.makedirs(output_dir)
+        except IOError:
+            log.logger.error(&quot;make out_put dir error&quot;)
+
+    crawl_thread.url_queue.put(base_url)   # add base_url to the url_queue of crawl_thread moudle
+    log.logger.debug(&quot;base url: %s&quot; % base_url)
+    log.logger.debug(&quot;max depth: &quot; + str(max_depth))
+
+    # BFs-breadth first, consume all urls of url_queue,put new producing urls to sub_url_queue
+    # and then redirect sub_url_queue to url_queue
+    for current_depth in range(0, max_depth):
+        log.logger.debug(&quot;current depth: %s&quot; % current_depth)
+        log.logger.debug(&quot;current queue size: %d&quot; % crawl_thread.url_queue.qsize())
+        crawl_thread.muti_crawl(thread_count=int(config.get(&apos;thread_count&apos;)),
+                                reg=reg,
+                                crawl_interval=crawl_interval,
+                                crawl_timeout=crawl_timeout,
+                                output_dir=output_dir)
+
+        # make sub_url_queue the working queue
+        crawl_thread.url_queue = crawl_thread.sub_url_queue
+        current_depth += 1
+
+# logging end time and full duration
+log.logger.debug(&quot;spider gracefully end at: &quot; + time.strftime(&apos;%Y-%m-%d %H:%M:%S&apos;, time.localtime(time.time())) +
+                 &quot; Full Duration: &quot; + str(time.time() - start_time) + &apos;s&apos; + &quot; ---&quot;)
+</code></pre><p>main()</p>
+<p>option_parser.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-4"><a href="#coding-utf-8-4" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import optparse</p>
+<h1 id="comand-option-parser-for-mini-spider-py"><a href="#comand-option-parser-for-mini-spider-py" class="headerlink" title="comand option parser for mini_spider.py"></a>comand option parser for mini_spider.py</h1><p>parser = optparse.OptionParser()<br>parser.add_option(“-c”, “–conf”, action=”store”, dest=”conf”, help=”load config file”, metavar=”FILE”)<br>parser.add_option(“-v”, “–version”, action=”store_true”, dest=”version”, help=”show project version”)<br>(options, args) = parser.parse_args()</p>
+<p>seedfile_load.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-5"><a href="#coding-utf-8-5" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>def get_urls(seed_file):<br>    “””<br>    get urls from seed file,a new blank line needed at the end of the file<br>    @:param seed_file type:str seed_file path, read from the config file<br>    “””<br>    with open(seed_file, ‘r’) as f:</p>
+<pre><code># add &apos;http://&apos;; if url not contains &apos;http&apos;
+return map(lambda x: &apos;http://&apos;; + x[:-1] if &apos;http&apos; not in x else x[:-1], f.readlines())
+</code></pre><p>webpage_parser.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-6"><a href="#coding-utf-8-6" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import re<br>import os<br>import platform<br>import log</p>
+<h1 id="handle-the-difference-between-python2-and-python3"><a href="#handle-the-difference-between-python2-and-python3" class="headerlink" title="handle the difference between python2 and python3"></a>handle the difference between python2 and python3</h1><p>if (platform.python_version()) &lt; ‘3’:<br>    import urllib<br>    import HTMLParser<br>else:<br>    import urllib.request as urllib<br>    import html.parser as HTMLParser<br>class UrlParser(HTMLParser.HTMLParser):<br>    def <strong>init</strong>(self):<br>        self.links = []<br>        HTMLParser.HTMLParser.<strong>init</strong>(self)</p>
+<pre><code>def handle_starttag(self, tag, attrs):
+    if tag == &apos;a&apos;:
+        for name, value in attrs:
+            if name == &apos;href&apos;:
+                self.links.append(value)
+
+def get_links(self):
+    return self.links
+</code></pre><p>def retrieve_urls(current_url, pattern):<br>    “””<br>    retrieve urls from url using regex pattern<br>    @:param url type:str should contains ‘http://‘;<br>    @:param reg type:str regex pattern read from spider.conf<br>    :return url_list(type:list) if current_url is valid<br>    :return None if url is invalid<br>    “””<br>    parser = UrlParser()<br>    try:<br>        parser.feed(urllib.urlopen(current_url).read())<br>        links = parser.get_links()</p>
+<pre><code>    # log.logger.debug(&quot;links: &quot; + &apos;,&apos;.join(links))
+    reg_pattern = re.compile(pattern)
+    # log.logger.debug(&apos;reg pattern: &apos; + pattern)
+    url_list = []
+    for link in links:
+        # log.logger.debug(&apos;link: &apos; + link)
+        match = re.match(reg_pattern, link)
+
+        if match:
+            # log.logger.debug(&apos;match result: &apos; + match.group())
+            url_list.append(match.group())
+        else:
+            pass
+            # log.logger.debug(&apos;match result: &apos; + &quot;None&quot;)
+
+    url_list = list(set(url_list))  # remove duplicated urls
+    # log.logger.debug(&quot;url_list: &quot; + &quot;,&quot;.join(url_list))
+
+    # if urls in url_list not contains &apos;http&apos; then add current_url before
+    # if urls contains &apos;javascript&apos; add current_url and the last part
+    def format_url(url):
+        if &quot;&amp;quot;&quot; in url:
+            url = url.replace(&quot;&amp;quot;&quot;, &apos;&quot;&apos;)
+        if &quot;&amp;nbsp;&quot; in url:
+            url = url.replace(&quot;&amp;nbsp;&quot;, &quot; &quot;)
+
+        if &apos;http&apos; in url:
+            return url
+        elif url[:2] == &apos;//&apos;:
+            return &apos;http:&apos; + url
+        else:
+            base_url = &apos;/&apos;.join(current_url.split(&apos;/&apos;)[:-1])
+            if &apos;javascript&apos; in url:
+                if &apos;=&apos; in url:
+                    try:
+                        return base_url + &apos;/&apos; + url.split(&apos;=&apos;)[1][1:]
+                    except IndexError:
+                        log.logger.warning(&quot;url: %s format fail&quot; % url)
+                else:
+                    return None
+            else:
+                return base_url + &apos;/&apos; + url
+    url_list = map(format_url, url_list)
+
+    return url_list
+except IOError:
+    log.logger.warning(&quot;current url: %s is invalid&quot; % current_url)
+    return None
+</code></pre><p>def save_page(url, output_dir):<br>    “””<br>    save url html page to output_dir<br>    :param url: url to save, should contains .html, will makedirs if uri contains muti dirs<br>    :param output_dir: base output dir<br>    :return: None<br>    “””<br>    if output_dir[0] != ‘/‘:<br>        if output_dir[:2] == ‘./‘:<br>            output_dir = output_dir[2:]<br>        output_dir = os.path.join(os.path.dirname(<strong>file</strong>), output_dir)<br>    log.logger.debug(“url: “ + url)<br>    uri = url.split(‘/‘)[3:]<br>    log.logger.debug(“uri: “ + ‘,’.join(uri))<br>    if uri:<br>        file_dir = os.path.join(output_dir, *uri[:-1])  # eg. ./output/page1/page1_1<br>        file_name = uri[-1]<br>    else:<br>        file_dir = output_dir<br>        file_name = ‘index.html’</p>
+<pre><code>log.logger.debug(&quot;file_dir: &quot; + file_dir)
+if not os.path.exists(file_dir):
+    if &apos;Windows&apos; in platform.platform():
+        try:
+            os.makedirs(file_dir)  # make sub dirs in output dir
+        except WindowsError:
+            log.logger.error(&quot;create dirs: %s fail&quot;, file_dir)
+    else:
+        try:
+            os.makedirs(file_dir)  # make sub dirs in output dir
+        except OSError:
+            log.logger.error(&quot;create dirs: %s fail&quot;, file_dir)
+
+file_path = os.path.join(file_dir, file_name)  # eg. page1_1_1.html
+log.logger.debug(&quot;file_path: &quot; + file_path)
+try:
+    urllib.urlretrieve(url, file_path)  # save html
+except IOError:
+    log.logger.error(&quot;save file: %s fail&quot; % file_path)
+</code></pre><p>conf/spider.conf<br>[spider]<br>url_list_file: ./seed/urls ; 种子文件路径<br>output_directory: ./output ; 抓取结果存储目录<br>max_depth: 3 ; 最大抓取深度(种子为0级)<br>crawl_interval: 1 ; 抓取间隔. 单位: 秒<br>crawl_timeout: 1 ; 抓取超时. 单位: 秒<br>target_url: .*.html|htm ; 需要存储的目标网页URL pattern(正则表达式)<br>thread_count: 8 ; 抓取线程数</p>
+<p>seed/urls<br>www.baidu.com<br>www.sina.com</p>
+<p>.project_info.json<br>{<br>  “project_name”: “mini_spider”,<br>  “author”: “Li Dan”,<br>  “version”: “0.1”,<br>  “last_update”: “2018/01/13”<br>}</p>
+<p>test/test_config.py</p>
+<p>test/test_crawl_thread.py</p>
+<p>test/test_option_parser.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-7"><a href="#coding-utf-8-7" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import os<br>import unittest<br>import json<br>import subprocess<br>class TestOptionParser(unittest.TestCase):<br>    def setUp(self):<br>        pass</p>
+<pre><code>def tearDown(self):
+    pass
+
+@staticmethod
+def cmd(cmd):
+    mytask = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT)
+
+    stdstr = mytask.stdout.read()
+    return stdstr
+
+def test_option_help(self):
+    self.assertTrue(&apos;show this help message and exit&apos; in self.cmd(&apos;python ../mini_spider.py -h&apos;))
+    self.assertTrue(&apos;show this help message and exit&apos; in self.cmd(&apos;python ../mini_spider.py --help&apos;))
+
+def test_option_version(self):
+    project_info_file = os.path.join(os.path.dirname(__file__), &quot;../.project_info.json&quot;)
+    with open(project_info_file, &quot;r&quot;) as f:
+        version = json.load(f)[&apos;version&apos;]
+    self.assertTrue(version in self.cmd(&apos;python ../mini_spider.py -v&apos;))
+    self.assertTrue(version in self.cmd(&apos;python ../mini_spider.py --version&apos;))
+
+def test_option_conf(self):
+    pass
+
+def test_option_conf_no_args(self):
+    self.assertTrue(&apos;option requires 1 argument&apos; in self.cmd(&apos;python ../mini_spider.py -c&apos;))
+    self.assertTrue(&apos;option requires 1 argument&apos; in self.cmd(&apos;python ../mini_spider.py --conf&apos;))
+
+def test_config_file_not_exist(self):
+    pass
+</code></pre><p>test_seedfile_load.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-8"><a href="#coding-utf-8-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import unittest<br>import os<br>class TestSeedFileLoad(unittest.TestCase):<br>    def setUp(self):<br>        self.seed_file = os.path.join(os.path.dirname(<strong>file</strong>), ‘../seed/urls’)<br>        self.origin_content = self.read_seed_file()</p>
+<pre><code>def tearDown(self):
+    self.write_seed_file(self.origin_content)
+
+def read_seed_file(self):
+    with open(self.seed_file) as f:
+        return f.read()
+
+def write_seed_file(self, content):
+    with open(self.seed_file, &apos;w&apos;) as f:
+        f.write(self.origin_content)
+
+def test_muti_lines(self):
+    pass
+
+def test_no_new_line_end(self):
+    pass
+
+def test_url_contains_http(self):
+    pass
+
+def test_seed_file_not_exists(self):
+    pass
+</code></pre><p>test_webpage_parser.py</p>
+<p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8-9"><a href="#coding-utf-8-9" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import unittest<br>import webpage_parser<br>class TestSeedFileLoad(unittest.TestCase):<br>    def setUp(self):<br>        pass</p>
+<pre><code>def tearDown(self):
+    pass
+@staticmethod
+def format_url(current_url, url):
+    if &quot;&amp;quot;&quot; in url:
+        url = url.replace(&quot;&amp;quot;&quot;, &apos;&quot;&apos;)
+    if &quot;&amp;nbsp;&quot; in url:
+        url = url.replace(&quot;&amp;nbsp;&quot;, &quot; &quot;)
+
+    if &apos;http&apos; in url:
+        return url
+    elif url[:2] == &apos;//&apos;:
+        return &apos;http:&apos; + url
+    elif &apos;javascript&apos; in url:
+        if &apos;=&apos; in url:
+            try:
+                return current_url + &apos;/&apos; + url.split(&apos;=&apos;)[1][1:]
+            except IndexError:
+                print(&quot;url: %s format fail&quot; % url)
+        else:
+            return None
+    else:
+        return current_url + &apos;/&apos; + url
+
+def test_save_html(self):
+    webpage_parser.save_page(&apos;pycm.baidu.com:8081/page1.html&apos;, &apos;./output&apos;)
+    try:
+        with open(&apos;../output/baidu.html&apos;, &apos;r&apos;) as f:
+            html = f.read()
+        self.assertTrue(&apos;page1.html&apos; in html)
+    except IOError:
+        self.fail(&apos;no html fail saved&apos;)
+def test_save_html_with_dirs(self):
+    webpage_parser.save_page(&apos;pycm.baidu.com:8081/page1/page1_1.html&apos;, &apos;output&apos;)
+    try:
+        with open(&apos;../output/page1/page1_1.html&apos;, &apos;r&apos;) as f:
+            html = f.read()
+        self.assertTrue(&apos;page1_1&apos; in html)
+    except IOError:
+        self.fail(&apos;no html fail saved&apos;)
+def test_format_url(self):
+    self.assertEqual(self.format_url(&apos;http://www.baidu.com&apos;;, &apos;//www.baidu.com/cache/sethelp/help.html&apos;;),
+                     &apos;http://www.baidu.com/cache/sethelp/help.html&apos;;)
+    self.assertEqual(self.format_url(&apos;http://www.baidu.com&apos;;, &apos;http://www.baidu.com/cache/sethelp/help.html&apos;;),
+                     &apos;http://www.baidu.com/cache/sethelp/help.html&apos;;)
+    self.assertEqual(self.format_url(&apos;http://www.baidu.com&apos;;, &apos;https://www.baidu.com&apos;;),
+                     &apos;https://www.baidu.com&apos;;)
+    self.assertEqual(self.format_url(&apos;http://www.baidu.com&apos;;, &apos;javascript;&apos;),
+                     None)
+    self.assertEqual(self.format_url(&apos;http://www.baidu.com&apos;;, &apos;javascript:location.href=&amp;quot;page4.html&apos;),
+                     &apos;http://www.baidu.com/page4.html&apos;;)
+    self.assertEqual(self.format_url(&apos;http://www.baidu.com&apos;;, &apos;page4.html&apos;),
+                     &apos;http://www.baidu.com/page4.html&apos;;)
+
+def test_retrieve_urls(self):
+    url_list = webpage_parser.retrieve_urls(&apos;http://www.baidu.com&apos;;, &apos;.*.html|htm&apos;)
+    self.assertTrue(&apos;http://www.baidu.com/gaoji/preferences.html&apos;; in url_list)
+    # print url_list
+    url_list = webpage_parser.retrieve_urls(&apos;http://www.baidu.com/gaoji/preferences.html&apos;;, &apos;.*.html|htm&apos;)
+    self.assertTrue(url_list == [])
+    url_list = webpage_parser.retrieve_urls(&apos;http://www.baidu.com/cache/sethelp/help.html&apos;;, &apos;.*.html|htm&apos;)
+    # print url_list
+    self.assertTrue(&apos;http://www.baidu.com/duty/index.html&apos;; in url_list)
+    url_list = webpage_parser.retrieve_urls(&apos;http://www.baidu.com/duty/index.html&apos;;, &apos;.*.html|htm&apos;)
+    print url_list
+    self.assertTrue(&apos;http://www.baidu.com/duty/yinsiquan.html&apos;; in url_list)
+</code></pre>
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

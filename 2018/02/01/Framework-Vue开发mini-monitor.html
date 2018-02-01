@@ -1,0 +1,401 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Framework-Vue开发mini_monitor | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Framework-Vue开发mini_monitor"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Framework-Vue开发mini_monitor</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:51:47</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>根据麦子学院-Django开发监控系统开发</p>
+<h1 id="requirements-txt"><a href="#requirements-txt" class="headerlink" title="requirements.txt"></a>requirements.txt</h1><p>nose<br>djangorestframework<br>markdown<br>django-filter</p>
+<h1 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py"></a>settings.py</h1><p>INSTALLED_APPS = [<br>    ‘django.contrib.admin’,<br>    ‘django.contrib.auth’,<br>    ‘django.contrib.contenttypes’,<br>    ‘django.contrib.sessions’,<br>    ‘django.contrib.messages’,<br>    ‘django.contrib.staticfiles’,<br>    ‘monitor’,<br>    ‘rest_framework’,<br>]</p>
+<p>#urls.py<br>from django.conf.urls import url, include<br>from django.contrib import admin</p>
+<h1 id="from-django-contrib-auth-models-import-User"><a href="#from-django-contrib-auth-models-import-User" class="headerlink" title="from django.contrib.auth.models import User"></a>from django.contrib.auth.models import User</h1><h1 id="from-rest-framework-import-routers-serializers-views"><a href="#from-rest-framework-import-routers-serializers-views" class="headerlink" title="from rest_framework import routers, serializers, views"></a>from rest_framework import routers, serializers, views</h1><p>from monitor import views</p>
+<p>urlpatterns = [<br>    url(r’^admin/‘, admin.site.urls),<br>    url(r’^api-auth/‘,include(‘rest_framework.urls’, namespace=’rest_framework’)),</p>
+<pre><code>url(r&apos;^api/apps/$&apos;,views.app_list),
+url(r&apos;^api/apps/(?P&lt;pk&gt;[0-9]+)/$&apos;,views.app_detail),
+
+url(r&apos;^api/app_statistics/$&apos;,views.app_statistics_list),
+url(r&apos;^api/app_statistics/(?P&lt;pk&gt;[0-9]+)/$&apos;,views.app_statistics_detail),
+
+url(r&apos;^api/app_history/$&apos;,views.app_history_list),
+url(r&apos;^api/app_history/(?P&lt;pk&gt;[0-9]+)/$&apos;,views.app_history_detail),
+
+url(r&apos;^api/groups/$&apos;,views.group_list),
+url(r&apos;^api/groups/(?P&lt;pk&gt;[0-9]+)/$&apos;,views.group_detail),
+
+url(r&apos;^api/hosts/$&apos;,views.host_list),
+url(r&apos;^api/hosts/(?P&lt;pk&gt;[0-9]+)/$&apos;,views.host_detail)
+</code></pre><p>]</p>
+<p>#monitor/util/util.py<br>def get_ip(request):<br>    x_forwarded_for = request.META.get(‘HTTP_X_FORWARDED_FOR’)<br>    if x_forwarded_for:<br>        ip = x_forwarded_for.split(‘,’)[-1].strip()<br>    else:<br>        ip = request.META.get(‘REMOTE_ADDR’)<br>    return ip</p>
+<p>#monitor/models.py</p>
+<p>from django.db import models<br>from datetime import datetime</p>
+<h1 id="Create-your-models-here"><a href="#Create-your-models-here" class="headerlink" title="Create your models here."></a>Create your models here.</h1><p>class App(models.Model):<br>    class Meta:<br>        db_table = ‘app’</p>
+<pre><code>name = models.CharField(max_length=128)
+host_ip = models.IntegerField()
+group_id = models.IntegerField()
+configuration = models.TextField()
+status = models.CharField(max_length=12)
+message = models.TextField()
+enable = models.IntegerField()
+last_update = models.DateTimeField()
+
+
+@classmethod
+def create(cls, name, host_ip, status, message, enable, group_id,last_update):
+    app = cls(name=name,
+        host_ip=host_ip,
+        status=status,
+        message=message,
+        enable=enable,
+        group_id=group_id,
+        last_update=last_update
+        )
+    return app
+</code></pre><p>class AppStatistics(models.Model):<br>    class Meta:<br>        db_table = ‘app_statistics’</p>
+<pre><code>app_id = models.IntegerField()
+statistics = models.CharField(max_length=256)
+time = models.DateTimeField(auto_now=True)
+
+@classmethod
+def create(cls,app_id,statistics):
+    appStatistics = cls(app_id=app_id,statistics=statistics,)
+    return appStatistics    
+</code></pre><p>class AppHistory(models.Model):<br>    class Meta:<br>        db_table = ‘app_history’</p>
+<pre><code>app_id = models.IntegerField()
+status = models.CharField(max_length=32)
+message = models.TextField(null=True)
+time = models.DateTimeField(auto_now=True)
+
+def convert_to_epoc(self):
+    return self.time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)
+
+@classmethod
+def create(cls, app_id, status, message):
+    group = cls(app_id=app_id, status=status,message=message)
+    return group
+</code></pre><p>class Group(models.Model):<br>    class Meta:<br>        db_table = ‘app_group’</p>
+<pre><code>unique_name = models.CharField(max_length=32)
+display_name = models.CharField(max_length=32)
+
+@classmethod
+def create(cls, unique_name, display_name):
+    group = cls(unique_name=unique_name, display_name=display_name)
+    return group
+</code></pre><p>class Host(models.Model):<br>    class Meta:<br>        db_table = ‘app_host’</p>
+<pre><code>name = models.CharField(max_length=32)
+ip = models.CharField(max_length=64)
+description = models.CharField(max_length=256, null=True)
+
+@classmethod
+def create(cls, ip, name=&apos;&apos;):
+    group = cls(ip=ip, name=name)
+    return group
+</code></pre><p>#serializers.py<br>from rest_framework import serializers<br>from monitor.models import App,AppStatistics,AppHistory,Group,Host<br>class AppSerializer(serializers.ModelSerializer):<br>    last_update = serializers.ReadOnlyField(source=’convert_to_epoc’)<br>    class Meta:<br>        model = App<br>        fields = (‘id’,’name’,’host_ip’,’configuration’,’status’,<br>            ‘message’,’enable’,’last_update’)<br>class ManageAppSerializer(serializers.ModelSerializer):<br>    last_update = serializers.ReadOnlyField(source=’convert_to_epoc’)<br>    class Meta:<br>        model = App<br>        fields = (‘id’,’name’,’host_ip’,’group_id’,’configuration’,’status’,<br>            ‘message’,’enable’,’last_update’)<br>class AppStatisticsSerializer(serializers.ModelSerializer):<br>    time = serializers.ReadOnlyField(source=’convert_to_epoc’)<br>    class Meta:<br>        model = AppStatistics<br>        fields = (‘id’,’app_id’,’statistics’,’time’)<br>class AppHistorySerializer(serializers.ModelSerializer):<br>    time = serializers.ReadOnlyField(source=’convert_to_epoc’)<br>    class Meta:<br>        model = AppHistory<br>        fields = (‘app_id’,’status’,’message’,’time’)<br>class GroupSerializer(serializers.ModelSerializer):<br>    class Meta:<br>        model = Group<br>        fields = (‘unique_name’, ‘display_name’, ‘id’)<br>class HostSerializer(serializers.ModelSerializer):<br>    class Meta:<br>        model = Host<br>        fields = (‘name’, ‘ip’, ‘description’)</p>
+<p>#monitor/views.py</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding:utf-8"></a>coding:utf-8</h1><p>from django.shortcuts import render<br>from rest_framework.decorators import api_view<br>from monitor.serializers import AppSerializer, AppStatisticsSerializer<br>from monitor.serializers import AppHistorySerializer, GroupSerializer,HostSerializer<br>from monitor.models import App, AppStatistics, AppHistory, Group, Host<br>from rest_framework.response import Response<br>from django.views.decorators.csrf import csrf_exempt<br>from django.http.response import JsonResponse, HttpResponse<br>from util.util import get_ip<br>from datetime import datetime<br>import json</p>
+<p>@api_view([‘GET’, ‘POST’])<br>@csrf_exempt<br>def app_list(request):<br>    ‘’’<br>    List all apps or create a new app<br>    ‘’’<br>    if request.method == ‘GET’:<br>        group_id = request.GET.get(‘group_id’,None)<br>        if group_id:<br>            tasks = App.objects.filter(enable=1).filter(group_id=group_id).all()<br>        else:<br>            tasks = App.objects.filter(enable=1).all()<br>        serializer = AppSerializer(tasks, many=True)<br>        return Response(serializer.data)<br>    elif request.method == ‘POST’:<br>        name = request.data.get(‘name’)<br>        app = App.create(name,1,”OK”,””,1,2).save()<br>        serializer = AppSerializer(app, many=False)<br>        return JsonResponse(serializer.data,safe=False)</p>
+<p>@api_view([‘GET’,’PUT’,’DELETE’])<br>def app_detail(request, pk):<br>    ‘’’<br>    Get,update or delete a specific app<br>    ‘’’<br>    try:<br>        try:<br>            pk = int(pk)<br>            app = App.objects.get(pk=pk)<br>        except:<br>            app = App.objects.filter(name=pk).first()<br>    except App.DoesNotExist:<br>        return HttpResponse(status=404)</p>
+<pre><code>if request.method == &apos;GET&apos;:
+    serializer = AppSerializer(app)
+    return JsonResponse(serializer.data)
+
+if request.method == &apos;DELETE&apos;:
+    app.enable = 0
+    return JsonResponse(serializer.data)
+
+if request.method == &apos;PUT&apos;:
+    if not app:
+        res = &amp;#123;&quot;code&quot;:405,&quot;message&quot;:&quot;Not found this app&quot;&amp;#125;
+        return Response(data=res,status=405)
+
+ip = get_ip(request)
+if ip is not None:
+    host = Host.objects.filter(ip=ip).first()
+    if host is None:
+        host = Host.create(ip)
+        host.save()
+status = request.data.get(&quot;status&quot;)
+statistics = request.data.get(&quot;message&quot;,app.message)
+if status is None:
+    res = &amp;#123;&quot;code&quot;:400,&quot;message&quot;:&quot;wong&quot;&amp;#125;
+    return Response(data=res, status=400)
+app.status = status
+app.last_update = datetime.now()
+app.host_id = host.id
+app.save()
+if statistics:
+    try:
+        json.loads(statistics)
+    except:
+        res = &amp;#123;&quot;code&quot;:400,&quot;message&quot;:&quot;Statistics format must json&quot;&amp;#125;
+        return Response(data=res,status=400)
+    appStatistics = AppStatistics.create(statistics,app.id)
+    appStatistics.save()
+    serializer = AppSerializer(app)
+return JsonResponse(serializer.data)
+</code></pre><p>def manage_detail(request, pk):<br>    try:<br>        pk = int(pk)<br>        app = App.objects.get(pk=pk)<br>    except:<br>        app = App.objects.filter(name=pk).first()<br>    if not app:<br>        return HttpResponse(status=404)</p>
+<pre><code>elif request.method == &apos;GET&apos;:
+    serializer = manageAppSerializer(app)
+    return JsonResponse(serializer.data)
+
+elif request.method == &apos;POST&apos;:
+    app.name = reqqest.data.get(&quot;name&quot;,app_name)
+    app.host_id = request.data.get(&quot;host_id&quot;, app.host_id)
+    app.group_id = request.data.get(&quot;group_id&quot;, app.group_id)
+    app.configuration = request.data.get(&quot;configuration&quot;, app.configuration)
+    app.save()
+    serializer = manager_app_serializer(app, many=False)
+    return JsonResponse(serializer.data, safe=False)
+</code></pre><p>@api_view([‘GET’])<br>@csrf_exempt<br>def app_statistics_list(request,pk):<br>    ‘’’<br>    List all app_statisticss<br>    ‘’’<br>    if request.method == ‘GET’:<br>        limit = int(request.GET.get(‘limit’,12))<br>        start_date = request.GET.get(‘start_date’,None)<br>        end_date = request.GET.get(‘end_date’,None)<br>        if start_date and end_date:<br>            app_statistics_list = AppStatistics.objects.filter(app_id=pk).filter(time__range=(start_date,end_date)).order_by(‘-id’).all()<br>        else:<br>            app_statistics_list = AppStatistics.objects.filter(app_id=pk).order_by(‘-id’)[:limit].all()</p>
+<pre><code>serializer = AppStatisticsSerializer(app_statistics_list, many=False)
+return JsonResponse(serializer.data, safe=False)
+</code></pre><p>@api_view([‘GET’, ‘POST’])<br>@csrf_exempt<br>def app_history_list(request):<br>    ‘’’<br>    List all app_historys or create a new app_history<br>    ‘’’<br>    if request.method == ‘GET’:<br>        limit = reqqest.GET.get(‘limit’, 12)<br>        app_id = reqqest.GET.get(‘app_id’)<br>        try:<br>            limit = int(limit)<br>            app_id = int(app_id)<br>        except:<br>            res = &#123;”code”:404,”message”:”Limit must be int”&#125;<br>            return Response(data=res,status=400)<br>        app_history_list = AppHistory.objects.filter(app_id=app_id).order_by(‘-id’)[:limit]<br>        serializer = AppHistorySerializer(app_history_list, many=True)<br>        return Response(serializer.data)<br>    elif request.method == ‘POST’:<br>        app_id = request.data.get(‘app_id’)<br>        status = request.data.get(‘status’)<br>        message = request.data.get(‘message’)<br>        if app_id and status:<br>            checkapp_history = AppHistory.objects.filter(app_id=app_id).first()<br>            if checkapp_history:<br>                res = &#123;”code”:400,<br>                “message”: “Ops! app history app_id already exists”&#125;<br>                return Response(data=res,status=400)</p>
+<pre><code>    checkip = AppHistory.objects.filter(status=status).first()
+    if checkip:
+        res = &amp;#123;&quot;code&quot;:400,
+        &quot;message&quot;: &quot;Ops! app history status already exists&quot;&amp;#125;
+        return Response(data=res,status=400)
+else:
+    res = &amp;#123;&quot;code&quot;:400,
+    &quot;message&quot;:&quot;Ops!app history app_id and status can&apos;t be null&quot;
+
+    &amp;#125;
+    return Response(data=res,status=400)
+app_history = AppHistory.create(app_id, status, message)
+app_history.save()
+serializer = AppHistorySerializer(app_history, many=False)
+return JsonResponse(serializer.data, safe=False)
+</code></pre><p>@api_view([‘GET’, ‘POST’])<br>@csrf_exempt<br>def group_list(request):<br>    ‘’’<br>    List all groups or create a new group<br>    ‘’’<br>    if request.method == ‘GET’:<br>        tasks = Group.objects.all()<br>        serializer = GroupSerializer(tasks, many=True)<br>        return Response(serializer.data)<br>    elif request.method == ‘POST’:</p>
+<pre><code># serializer = GroupSerializer(data=request.DATA)
+# if serializer.is_valid():
+#     serializer.save()
+#     return Response(serializer.data, status=201)
+unique_name = request.data.get(&apos;unique_name&apos;)
+status = request.data.get(&apos;status&apos;)
+message = request.data.get(&apos;message&apos;)
+if unique_name and status:
+    checkgroup = Group.objects.filter(unique_name=unique_name).first()
+    if checkgroup:
+        res = &amp;#123;&quot;code&quot;:400,
+        &quot;message&quot;: &quot;Ops! Unique name already exists&quot;&amp;#125;
+        return Response(data=res,status=400)
+else:
+    res = &amp;#123;&quot;code&quot;:400,
+    &quot;message&quot;:&quot;Ops!Unique name and display name can&apos;t be null&quot;
+
+    &amp;#125;
+    return Response(data=res,status=400)
+group = Group.create(unique_name, display_name)
+group.save()
+serializer = GroupSerializer(group, many=False)
+return JsonResponse(serializer.data, safe=False)
+</code></pre><p>@api_view([‘GET’,’PUT’,’DELETE’])<br>def group_detail(request, pk):<br>    ‘’’<br>    Get,update or delete a specific group<br>    ‘’’<br>    try:<br>        group = Group.objects.get(pk=pk)<br>    except Group.DoesNotExist:<br>        return HttpResponse(status=404)</p>
+<pre><code>if request.method == &apos;GET&apos;:
+    serializer = GroupSerializer(group)
+    return JsonResponse(serializer.data)
+
+elif request.method == &apos;PUT&apos;:
+    group.unique_name = request.data.get(&apos;unique_name&apos;,group.unique_name)
+    group.display_name = request.data.get(&apos;display_name&apos;,
+        group.display_name)
+    group.save()
+    serializer = GroupSerializer(group)
+    return JsonResponse(serializer.data)
+
+elif request.method == &apos;DELETE&apos;:
+    group.delete()
+    res = &amp;#123;&quot;code&quot;:200,
+    &quot;message&quot;:&quot;Delete Suessus!&quot;&amp;#125;
+    return Response(data=res,status=200)
+</code></pre><p>@api_view([‘GET’])<br>@csrf_exempt<br>def host_list(request):<br>    ‘’’<br>    List all hosts<br>    ‘’’<br>    if request.method == ‘GET’:<br>        tasks = Host.objects.all()<br>        serializer = HostSerializer(tasks, many=True)<br>        return Response(serializer.data)</p>
+<p>@api_view([‘GET’,’PUT’,’DELETE’])<br>def host_detail(request, pk):<br>    ‘’’<br>    Get,update or delete a specific host<br>    ‘’’<br>    try:<br>        host = Host.objects.get(pk=pk)<br>    except Host.DoesNotExist:<br>        return HttpResponse(status=404)</p>
+<pre><code>if request.method == &apos;GET&apos;:
+    serializer = HostSerializer(host)
+    return JsonResponse(serializer.data)
+
+elif request.method == &apos;PUT&apos;:
+    host.name = request.data.get(&apos;name&apos;,host.name)
+    host.ip = request.data.get(&apos;ip&apos;,host.ip)
+    host.save()
+    serializer = HostSerializer(host)
+    return JsonResponse(serializer.data)
+</code></pre><h1 id="前端—-待完成"><a href="#前端—-待完成" class="headerlink" title="前端—-待完成"></a>前端—-待完成</h1>
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

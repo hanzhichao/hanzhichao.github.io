@@ -1,0 +1,282 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django开发简单CMS | 韩志超</title>
+  <meta name="author" content="Han Zhichao">
+  
+  <meta name="description" content="测试开发">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Django开发简单CMS"/>
+  <meta property="og:site_name" content="韩志超"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">韩志超</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class=""></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/categories" title="">
+                    <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>Django开发简单CMS</h2>
+					
+					<div>
+						<span class="post-time">2018-02-01 19:36:09</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<p>根据自强学堂教程编写</p>
+<h1 id="requirements-txt"><a href="#requirements-txt" class="headerlink" title="requirements.txt"></a>requirements.txt</h1><p>Django==1.8.3<br>DjangoUeditor</p>
+<h1 id="README-md"><a href="#README-md" class="headerlink" title="README.md"></a>README.md</h1><h2 id="A-CMS-PROJECT-by-Django"><a href="#A-CMS-PROJECT-by-Django" class="headerlink" title="A CMS PROJECT by Django"></a>A CMS PROJECT by Django</h2><p><a href="http://code.ziqiangxuetang.com/django/django-cms-develop.html" target="_blank" rel="noopener">参考教程</a></p>
+<blockquote>
+<p>modified DjangoUeditor/urls.py</p>
+</blockquote>
+<p>#coding:utf-8<br>from django import VERSION<br>if VERSION[0:2]&gt;(1,9):<br>    from django.conf.urls import url<br>elif VERSION[0:2]&gt;(1,3):<br>    from django.conf.urls import patterns, url<br>else:<br>    from django.conf.urls.defaults import patterns, url<br>from views import get_ueditor_controller<br>if VERSION[0:2]&gt;(1,9):<br>    urlpatterns = [<br>        url(r’^controller/$’,get_ueditor_controller)<br>    ]<br>else:<br>    urlpatterns = patterns(‘’,<br>        url(r’^controller/$’,get_ueditor_controller)<br>    )<br>urls.py<br>from django.conf.urls import include, url<br>from django.contrib import admin</p>
+<h1 id="from-DjangoUeditor-import-urls-as-DjangoUeditor-urls"><a href="#from-DjangoUeditor-import-urls-as-DjangoUeditor-urls" class="headerlink" title="from DjangoUeditor import urls as DjangoUeditor_urls"></a>from DjangoUeditor import urls as DjangoUeditor_urls</h1><p>from django.conf import settings</p>
+<p>urlpatterns = [<br>    url(r’^admin/‘, include(admin.site.urls)),<br>    url(r’^ueditor/‘, include(‘DjangoUeditor.urls’)),</p>
+<pre><code># url(r&apos;ueditor/&apos;, include(DjangoUeditor_urls)),
+url(r&apos;^$&apos;, &apos;cms.views.index&apos;, name=&apos;index&apos;),
+
+url(r&apos;^column/(?P&lt;column_slug&gt;[^/]+)/$&apos;, &apos;cms.views.column_detail&apos;, name=&apos;column&apos;),
+url(r&apos;^article/(?P&lt;article_slug&gt;[^/]+)/$&apos;, &apos;cms.views.article_detail&apos;, name=&apos;article&apos;),
+url(r&apos;^static/(?P&lt;path&gt;.*)$&apos;, &apos; django.views.static.serve&apos;, &amp;#123;&apos;document_root&apos;: settings.STATIC_ROOT&amp;#125;),
+url(r&apos;^admin/static/(?P&lt;path&gt;.*)$&apos;, &apos;django.views.static.serve&apos;,
+    &amp;#123;&apos;document_root&apos;: settings.STATIC_ROOT&amp;#125;),
+</code></pre><p>]<br>if settings.DEBUG:<br>    from django.conf.urls.static import static<br>    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)</p>
+<h1 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py"></a>settings.py</h1><p>INSTALLED_APPS = (<br>    ‘django.contrib.admin’,<br>    ‘django.contrib.auth’,<br>    ‘django.contrib.contenttypes’,<br>    ‘django.contrib.sessions’,<br>    ‘django.contrib.messages’,<br>    ‘django.contrib.staticfiles’,<br>    ‘DjangoUeditor’,<br>    ‘cms’,<br>)</p>
+<p>TEMPLATES = [<br>    &#123;<br>        ‘BACKEND’: ‘django.template.backends.django.DjangoTemplates’,<br>        ‘DIRS’: [os.path.join(BASE_DIR, ‘templates’)],<br>        ‘APP_DIRS’: True,<br>        ‘OPTIONS’: &#123;<br>            ‘context_processors’: [<br>                ‘django.template.context_processors.debug’,<br>                ‘django.template.context_processors.request’,<br>                ‘django.contrib.auth.context_processors.auth’,<br>                ‘django.contrib.messages.context_processors.messages’,<br>            ],<br>        &#125;,<br>    &#125;,<br>]</p>
+<h1 id="LANGUAGE-CODE-‘en-us’"><a href="#LANGUAGE-CODE-‘en-us’" class="headerlink" title="LANGUAGE_CODE = ‘en-us’"></a>LANGUAGE_CODE = ‘en-us’</h1><p>LANGUAGE_CODE = ‘zh-hans’</p>
+<h1 id="TIME-ZONE-‘UTC’"><a href="#TIME-ZONE-‘UTC’" class="headerlink" title="TIME_ZONE = ‘UTC’"></a>TIME_ZONE = ‘UTC’</h1><p>TIME_ZONE = ‘Asia/Shanghai’</p>
+<p>USE_I18N = True</p>
+<p>USE_L10N = True</p>
+<p>USE_TZ = True</p>
+<h1 id="Static-files-CSS-JavaScript-Images"><a href="#Static-files-CSS-JavaScript-Images" class="headerlink" title="Static files (CSS, JavaScript, Images)"></a>Static files (CSS, JavaScript, Images)</h1><h1 id="https-docs-djangoproject-com-en-1-8-howto-static-files"><a href="#https-docs-djangoproject-com-en-1-8-howto-static-files" class="headerlink" title="https://docs.djangoproject.com/en/1.8/howto/static-files/"></a><a href="https://docs.djangoproject.com/en/1.8/howto/static-files/" target="_blank" rel="noopener">https://docs.djangoproject.com/en/1.8/howto/static-files/</a></h1><h1 id="Static-files-CSS-JavaScript-Images-1"><a href="#Static-files-CSS-JavaScript-Images-1" class="headerlink" title="Static files (CSS, JavaScript, Images)"></a>Static files (CSS, JavaScript, Images)</h1><p>STATIC_URL = ‘static/‘<br>STATIC_ROOT = os.path.join(BASE_DIR, ‘static’).replace(‘\‘,’/‘)</p>
+<p>#STATICFILES_DIRS =(</p>
+<h1 id="os-path-join-BASE-DIR-“common-static”"><a href="#os-path-join-BASE-DIR-“common-static”" class="headerlink" title="os.path.join(BASE_DIR, “common_static”)"></a>os.path.join(BASE_DIR, “common_static”)</h1><p>#)</p>
+<h1 id="upload-folder"><a href="#upload-folder" class="headerlink" title="upload folder"></a>upload folder</h1><p>MEDIA_URL = ‘/media/‘<br>MEDIA_ROOT = os.path.join(BASE_DIR, ‘media’)</p>
+<p>#cms/models.py</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="* coding: utf-8 *"></a><em>*</em> coding: utf-8 <em>*</em></h1><p>from <strong>future</strong> import unicode_literals</p>
+<p>from django.db import models<br>from django.utils.encoding import python_2_unicode_compatible<br>from DjangoUeditor.models import UEditorField<br>from django.core.urlresolvers import reverse</p>
+<p>@python_2_unicode_compatible<br>class Column(models.Model):<br>    pre_column = models.ForeignKey(‘self’, verbose_name=’上级栏目’, blank=True, null=True)<br>    name = models.CharField(‘栏目名称’, max_length=256)<br>    slug = models.CharField(‘栏目网址’, max_length=256, db_index=True, unique=True)<br>    intro = models.TextField(‘栏目简介’, default=’’)<br>    thumbnail = models.ImageField(‘缩略图’, blank=True, null=True)</p>
+<pre><code>keywords = models.CharField(&apos;关键字&apos;, max_length=80, blank=True, null=True)
+description = models.TextField(&apos;描述&apos;, blank=True, null=True)
+
+def __str__(self):
+    return self.name
+
+class Meta:
+    verbose_name = &apos;栏目&apos;
+    verbose_name_plural = &apos;栏目&apos;
+    ordering = [&apos;name&apos;]
+
+def get_absolute_url(self):
+    return reverse(&apos;column&apos;, args=(self.slug,))
+</code></pre><p>@python_2_unicode_compatible<br>class Article(models.Model):<br>    STATUS_CHOICES = (<br>        (‘d’, “Draft”),<br>        (‘p’, ‘Published’),<br>    )</p>
+<pre><code>title = models.CharField(&apos;标题&apos;, max_length=256)
+keywords = models.CharField(&apos;关键字&apos;, max_length=80, blank=True, null=True)
+slug = models.CharField(&apos;网址&apos;, max_length=256,db_index=True, unique=True)
+column = models.ForeignKey(Column, verbose_name=&apos;归属栏目&apos;)
+author = models.ForeignKey(&apos;auth.User&apos;,blank=True, null=True, verbose_name=&apos;作者&apos;)
+thumbnail = models.ImageField(&apos;缩略图&apos;, blank=True, null=True)
+
+abstract = models.TextField(&apos;摘要&apos;, max_length=54, blank=True, null=True,
+                            help_text=&quot;可选,若为空将摘取正文的前54个字符&quot;)
+description = models.TextField(&apos;描述&apos;, blank=True, null=True)
+# content = models.TextField(&quot;内容&quot;, blank=True, null=True)
+content = UEditorField(&apos;内容&apos;, height=300, width=1000, default=u&apos;&apos;, blank=True,
+                       imagePath=&quot;uploads/images/&quot;,
+                       toolbars=&apos;besttome&apos;, filePath=&apos;uploads/files/&apos;)
+
+created_time = models.DateTimeField(&apos;创建时间&apos;, auto_now_add=True)
+last_modified_time = models.DateTimeField(&apos;修改时间&apos;, auto_now=True)
+views = models.PositiveIntegerField(&apos;浏览量&apos;, default=0)
+likes = models.PositiveIntegerField(&apos;点赞数&apos;, default=0)
+topped = models.BooleanField(&apos;置顶&apos;, default=False)
+
+def __str__(self):
+    return self.title
+
+class Meta:
+    verbose_name = &apos;文章&apos;
+    verbose_name_plural = &apos;文章&apos;
+    ordering = [&apos;-last_modified_time&apos;]
+
+def get_absolute_url(self):
+    return reverse(&apos;article&apos;, args=(self.slug,))
+</code></pre><p>#cms/admin.py<br>from django.contrib import admin<br>from .models import Column, Article</p>
+<p>class ColumnAdmin(admin.ModelAdmin):<br>    list_display = (‘name’, ‘pre_column’, ‘intro’)</p>
+<p>class ArticleAdmin(admin.ModelAdmin):<br>    list_display = (‘title’, ‘column’, ‘last_modified_time’)</p>
+<p>admin.site.register(Column, ColumnAdmin)<br>admin.site.register(Article, ArticleAdmin)</p>
+<p>#cms/views.py</p>
+<h1 id="coding-utf-8-1"><a href="#coding-utf-8-1" class="headerlink" title="* coding: utf-8 *"></a><em>*</em> coding: utf-8 <em>*</em></h1><p>from django.shortcuts import render<br>from django.http import HttpResponse<br>from .models import Column, Article<br>from unicms import settings</p>
+<p>def index(request):<br>    columns = Column.objects.all()</p>
+<pre><code># return HttpResponse(settings.STATIC_ROOT)
+return render(request, &apos;index.html&apos;, &amp;#123;&apos;columns&apos;: columns&amp;#125;)
+</code></pre><p>def column_detail(request, column_slug):</p>
+<pre><code># return HttpResponse(&apos;column slug: &apos; + column_slug)
+column = Column.objects.filter(slug=column_slug)
+return render(request, &apos;single.html&apos;, &amp;#123;&apos;column&apos;: column&amp;#125;)
+</code></pre><p>def article_detail(request, article_slug):</p>
+<pre><code># return HttpResponse(&apos;article slug: &apos; + article_slug)
+article = Article.objects.filter(slug=article_slug)[0]
+return render(request, &apos;single.html&apos;, &amp;#123;&apos;article&apos;:article&amp;#125;)
+</code></pre>
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" ></div>
+		</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  &copy; 2018 <a href="http://yoursite.com"> Han Zhichao </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>
